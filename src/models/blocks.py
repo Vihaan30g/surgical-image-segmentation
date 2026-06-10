@@ -105,3 +105,89 @@ class EncoderBlock(nn.Module):
 
         return features, pooled
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# =========================================
+# DECODER BLOCK
+# =========================================
+
+class DecoderBlock(nn.Module):
+
+
+    def __init__(
+        self,
+        in_channels,
+        skip_channels,
+        out_channels
+    ):
+
+        super().__init__()
+
+
+        # ================================
+        # UPSAMPLING
+        # ================================
+
+        self.up = nn.ConvTranspose2d(
+            in_channels=in_channels,
+            out_channels=out_channels,
+            kernel_size=2,
+            stride=2
+        )
+
+
+        # ================================
+        # FEATURE REFINEMENT
+        # ================================
+
+        self.conv = DoubleConv(
+            in_channels=out_channels + skip_channels,
+            out_channels=out_channels
+        )
+
+
+    def forward(
+        self,
+        x,
+        skip_features
+    ):
+
+
+        # ================================
+        # UPSAMPLE
+        # ================================
+
+        x = self.up(x)
+
+
+        # ================================
+        # CONCATENATE SKIP FEATURES
+        # ================================
+
+        x = torch.cat(
+            [x, skip_features],
+            dim=1
+        )
+
+
+        # ================================
+        # REFINE FEATURES
+        # ================================
+
+        x = self.conv(x)
+
+
+        return x
