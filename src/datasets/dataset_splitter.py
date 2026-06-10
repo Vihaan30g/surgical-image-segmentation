@@ -1,3 +1,4 @@
+
 from pathlib import Path
 
 
@@ -9,7 +10,21 @@ DATASET_ROOT = Path("data/archive")
 
 
 # =========================================
-# VIDEO SPLITS
+# AVAILABLE VIDEOS
+# =========================================
+
+ALL_VIDEOS = sorted([
+
+    folder.name
+
+    for folder in DATASET_ROOT.iterdir()
+
+    if folder.is_dir()
+])
+
+
+# =========================================
+# VIDEO-WISE SPLITS
 # =========================================
 
 TRAIN_VIDEOS = [
@@ -24,31 +39,23 @@ TRAIN_VIDEOS = [
     "video25",
     "video26",
     "video27",
-    "video28",
-    "video35",
-    "video37",
-    "video43",
-    "video48",
-    "video52",
-    "video55"
+    "video28"
 ]
 
 
 VAL_VIDEOS = [
 
-    "video02",
-    "video04",
-    "video06",
-    "video10",
-    "video22"
+    "video35",
+    "video37",
+    "video43"
 ]
 
 
 TEST_VIDEOS = [
 
-    "video23",
-    "video31",
-    "video40"
+    "video48",
+    "video52",
+    "video55"
 ]
 
 
@@ -72,6 +79,11 @@ def collect_image_mask_paths(video_list):
 
         for clip_folder in clip_folders:
 
+
+            # =================================
+            # RGB IMAGES
+            # =================================
+
             image_files = sorted(
 
                 clip_folder.glob("*_endo.png")
@@ -81,16 +93,31 @@ def collect_image_mask_paths(video_list):
             for image_path in image_files:
 
 
-                # skip masks themselves
+                # skip mask files
+
                 if "mask" in image_path.name:
 
                     continue
 
 
-                mask_name = image_path.stem + "_watershed_mask.png"
+                # =============================
+                # CORRESPONDING MASK
+                # =============================
 
-                mask_path = image_path.parent / mask_name
+                mask_name = (
 
+                    image_path.stem
+                    + "_watershed_mask.png"
+                )
+
+                mask_path = (
+                    image_path.parent / mask_name
+                )
+
+
+                # =============================
+                # STORE PAIRS
+                # =============================
 
                 if mask_path.exists():
 
@@ -108,16 +135,24 @@ def collect_image_mask_paths(video_list):
 
 def create_splits():
 
-    train_images, train_masks = collect_image_mask_paths(
-        TRAIN_VIDEOS
+    train_images, train_masks = (
+        collect_image_mask_paths(
+            TRAIN_VIDEOS
+        )
     )
 
-    val_images, val_masks = collect_image_mask_paths(
-        VAL_VIDEOS
+
+    val_images, val_masks = (
+        collect_image_mask_paths(
+            VAL_VIDEOS
+        )
     )
 
-    test_images, test_masks = collect_image_mask_paths(
-        TEST_VIDEOS
+
+    test_images, test_masks = (
+        collect_image_mask_paths(
+            TEST_VIDEOS
+        )
     )
 
 
@@ -138,3 +173,24 @@ def create_splits():
             test_masks
         )
     }
+
+
+# =========================================
+# DEBUG INFO
+# =========================================
+
+if __name__ == "__main__":
+
+    splits = create_splits()
+
+    print("\n===== DATASET SUMMARY =====\n")
+
+    for split_name in splits:
+
+        images, masks = splits[split_name]
+
+        print(f"{split_name.upper()}")
+
+        print(f"Images: {len(images)}")
+
+        print(f"Masks : {len(masks)}\n")
