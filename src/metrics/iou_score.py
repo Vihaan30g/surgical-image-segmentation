@@ -64,6 +64,12 @@ def iou_score(
         ) > 0
     )
 
+    valid_classes[0] = False
+
     iou = iou[valid_classes]
+
+
+
+
 
     return iou.mean().item()

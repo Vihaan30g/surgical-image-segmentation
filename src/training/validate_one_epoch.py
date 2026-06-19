@@ -2,6 +2,8 @@ from src.metrics.dice_score import dice_score
 from src.metrics.iou_score import iou_score
 from src.metrics.pixel_accuracy import pixel_accuracy
 
+import torch
+
 
 def validate_one_epoch(
     model,

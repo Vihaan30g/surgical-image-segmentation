@@ -84,6 +84,7 @@ class DiceLoss(nn.Module):
             denominator + self.smooth
         )
 
+        dice_score = dice_score[1:]
 
         # =====================================
         # DICE LOSS

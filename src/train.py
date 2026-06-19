@@ -1,5 +1,7 @@
 import torch
 
+torch.backends.cudnn.enabled = False    # for workstation. remove this for colab => will increase speed.
+
 from torch.utils.tensorboard import SummaryWriter
 
 from src.datasets.dataloader_setup import (
@@ -23,11 +25,14 @@ from src.training.validate_one_epoch import (
 # CONFIG
 # =====================================
 
-NUM_EPOCHS = 50
+# NUM_EPOCHS = 50
+# BATCH_SIZE = 8
+
+NUM_EPOCHS = 4
+BATCH_SIZE = 4
+
 
 LEARNING_RATE = 1e-4
-
-BATCH_SIZE = 8
 
 MODEL_SAVE_PATH = "best_model.pth"
 

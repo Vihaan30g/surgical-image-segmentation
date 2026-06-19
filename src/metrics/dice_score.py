@@ -56,11 +56,16 @@ def dice_score(
         denominator + smooth
     )
 
+        
     valid_classes = (
         targets_one_hot.sum(
             dim=(0, 2, 3)
         ) > 0
     )
+
+    valid_classes[0] = False
+
+
 
     dice = dice[valid_classes]
 

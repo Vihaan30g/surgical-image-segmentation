@@ -30,5 +30,9 @@ Thumbs.db
 
 # Outputs
 outputs/
-```
 
+
+# weights (locally created to test for few epoches)
+best_model.pth
+
+````
