@@ -2,71 +2,82 @@ import torch
 import torch.nn.functional as F
 
 
+NUM_CLASSES = 13
+
+
 def dice_score(
     logits,
     targets,
     smooth=1e-6
 ):
 
-    probs = F.softmax(
+    preds = torch.argmax(
         logits,
         dim=1
     )
 
-    preds = torch.argmax(
-        probs,
-        dim=1
-    )
+    image_scores = []
 
-    preds_one_hot = F.one_hot(
-        preds,
-        num_classes=13
-    )
+    for pred, target in zip(preds, targets):
 
-    targets_one_hot = F.one_hot(
-        targets.long(),
-        num_classes=13
-    )
+        pred_one_hot = F.one_hot(
+            pred,
+            num_classes=NUM_CLASSES
+        ).permute(
+            2,
+            0,
+            1
+        ).float()
 
-    preds_one_hot = preds_one_hot.permute(
-        0, 3, 1, 2
-    ).float()
+        target_one_hot = F.one_hot(
+            target.long(),
+            num_classes=NUM_CLASSES
+        ).permute(
+            2,
+            0,
+            1
+        ).float()
 
-    targets_one_hot = targets_one_hot.permute(
-        0, 3, 1, 2
-    ).float()
+        intersection = (
+            pred_one_hot *
+            target_one_hot
+        ).sum(
+            dim=(1, 2)
+        )
 
-    intersection = (
-        preds_one_hot *
-        targets_one_hot
-    ).sum(
-        dim=(0, 2, 3)
-    )
+        denominator = (
+            pred_one_hot.sum(dim=(1, 2))
+            +
+            target_one_hot.sum(dim=(1, 2))
+        )
 
-    denominator = (
-        preds_one_hot.sum(dim=(0, 2, 3))
-        +
-        targets_one_hot.sum(dim=(0, 2, 3))
-    )
+        dice = (
+            2 * intersection + smooth
+        ) / (
+            denominator + smooth
+        )
 
+        valid_classes = (
+            target_one_hot.sum(
+                dim=(1, 2)
+            ) > 0
+        )
 
-    dice = (
-        2 * intersection + smooth
-    ) / (
-        denominator + smooth
-    )
+        # Ignore background
+        valid_classes[0] = False
 
-        
-    valid_classes = (
-        targets_one_hot.sum(
-            dim=(0, 2, 3)
-        ) > 0
-    )
+        dice = dice[valid_classes]
 
-    valid_classes[0] = False
+        if len(dice) > 0:
 
+            image_scores.append(
+                dice.mean()
+            )
 
+    if len(image_scores) == 0:
 
-    dice = dice[valid_classes]
+        return 0.0
 
-    return dice.mean().item()
+    return torch.stack(
+        image_scores
+    ).mean().item()

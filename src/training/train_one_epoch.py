@@ -1,6 +1,4 @@
-from src.metrics.dice_score import dice_score
-from src.metrics.iou_score import iou_score
-from src.metrics.pixel_accuracy import pixel_accuracy
+from src.metrics.metrics import calculate_metrics
 import torch
 
 def train_one_epoch(
@@ -11,13 +9,7 @@ def train_one_epoch(
     device
 ):
     """
-    Train model for one epoch.
-
-    Returns:
-        epoch_loss,
-        epoch_dice,
-        epoch_iou,
-        epoch_acc
+    Train model for one epoch using the centralized metrics calculator.
     """
 
     # =====================================
@@ -42,7 +34,6 @@ def train_one_epoch(
         # =================================
 
         images = images.to(device)
-
         masks = masks.to(device)
 
         # =================================
@@ -69,21 +60,13 @@ def train_one_epoch(
         # =================================
         # METRICS
         # =================================
+        
+        # Calculate all metrics in one pass to ensure consistency
+        acc, dice, iou = calculate_metrics(outputs, masks)
 
-        running_dice += dice_score(
-            outputs,
-            masks
-        )
-
-        running_iou += iou_score(
-            outputs,
-            masks
-        )
-
-        running_acc += pixel_accuracy(
-            outputs,
-            masks
-        )
+        running_acc += acc
+        running_dice += dice
+        running_iou += iou
 
         # =================================
         # BACKPROPAGATION
@@ -107,25 +90,11 @@ def train_one_epoch(
     # EPOCH AVERAGES
     # =====================================
 
-    epoch_loss = (
-        running_loss /
-        len(dataloader)
-    )
-
-    epoch_dice = (
-        running_dice /
-        len(dataloader)
-    )
-
-    epoch_iou = (
-        running_iou /
-        len(dataloader)
-    )
-
-    epoch_acc = (
-        running_acc /
-        len(dataloader)
-    )
+    n = len(dataloader)
+    epoch_loss = running_loss / n
+    epoch_dice = running_dice / n
+    epoch_iou = running_iou / n
+    epoch_acc = running_acc / n
 
     return (
         epoch_loss,

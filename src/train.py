@@ -28,7 +28,7 @@ from src.training.validate_one_epoch import (
 # NUM_EPOCHS = 50
 # BATCH_SIZE = 8
 
-NUM_EPOCHS = 4
+NUM_EPOCHS = 2
 BATCH_SIZE = 4
 
 

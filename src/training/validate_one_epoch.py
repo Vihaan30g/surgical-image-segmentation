@@ -1,9 +1,5 @@
-from src.metrics.dice_score import dice_score
-from src.metrics.iou_score import iou_score
-from src.metrics.pixel_accuracy import pixel_accuracy
-
 import torch
-
+from src.metrics.metrics import calculate_metrics
 
 def validate_one_epoch(
     model,
@@ -11,10 +7,13 @@ def validate_one_epoch(
     criterion,
     device
 ):
+    """
+    Validate model for one epoch using the centralized metrics calculator.
+    """
 
-    # ==============================
-    # EVALUATION MODE
-    # ==============================
+    # =====================================
+    # EVAL MODE
+    # =====================================
 
     model.eval()
 
@@ -23,85 +22,65 @@ def validate_one_epoch(
     running_iou = 0.0
     running_acc = 0.0
 
-    # ==============================
-    # NO GRADIENTS
-    # ==============================
+    # =====================================
+    # NO GRADIENT FOR VALIDATION
+    # =====================================
 
     with torch.no_grad():
 
+        # =================================
+        # LOOP OVER BATCHES
+        # =================================
+
         for images, masks in dataloader:
 
-            # ======================
-            # DEVICE TRANSFER
-            # ======================
+            # =============================
+            # MOVE TO DEVICE
+            # =============================
 
             images = images.to(device)
-
             masks = masks.to(device)
 
-            # ======================
+            # =============================
             # FORWARD PASS
-            # ======================
+            # =============================
 
             outputs = model(images)
 
-            # ======================
+            # =============================
             # LOSS
-            # ======================
+            # =============================
 
             loss = criterion(
                 outputs,
                 masks
             )
 
-            # ======================
+            # =============================
             # METRICS
-            # ======================
+            # =============================
 
-            running_dice += dice_score(
-                outputs,
-                masks
-            )
+            acc, dice, iou = calculate_metrics(outputs, masks)
 
-            running_iou += iou_score(
-                outputs,
-                masks
-            )
+            running_acc += acc
+            running_dice += dice
+            running_iou += iou
 
-            running_acc += pixel_accuracy(
-                outputs,
-                masks
-            )
-
-            # ======================
-            # ACCUMULATE LOSS
-            # ======================
+            # =============================
+            # LOSS ACCUMULATION
+            # =============================
 
             running_loss += loss.item()
 
-    # ==============================
+    # =====================================
     # EPOCH AVERAGES
-    # ==============================
+    # =====================================
 
-    epoch_loss = (
-        running_loss /
-        len(dataloader)
-    )
-
-    epoch_dice = (
-        running_dice /
-        len(dataloader)
-    )
-
-    epoch_iou = (
-        running_iou /
-        len(dataloader)
-    )
-
-    epoch_acc = (
-        running_acc /
-        len(dataloader)
-    )
+    n = len(dataloader)
+    epoch_loss = running_loss / n
+    epoch_dice = running_dice / n
+    epoch_iou = running_iou / n
+    epoch_acc = running_acc / n
 
     return (
         epoch_loss,

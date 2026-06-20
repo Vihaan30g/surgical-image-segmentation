@@ -2,74 +2,84 @@ import torch
 import torch.nn.functional as F
 
 
+NUM_CLASSES = 13
+
+
 def iou_score(
     logits,
     targets,
     smooth=1e-6
 ):
 
-    probs = F.softmax(
+    preds = torch.argmax(
         logits,
         dim=1
     )
 
-    preds = torch.argmax(
-        probs,
-        dim=1
-    )
+    image_scores = []
 
-    preds_one_hot = F.one_hot(
-        preds,
-        num_classes=13
-    )
+    for pred, target in zip(preds, targets):
 
-    targets_one_hot = F.one_hot(
-        targets.long(),
-        num_classes=13
-    )
+        pred_one_hot = F.one_hot(
+            pred,
+            num_classes=NUM_CLASSES
+        ).permute(
+            2,
+            0,
+            1
+        ).float()
 
-    preds_one_hot = preds_one_hot.permute(
-        0, 3, 1, 2
-    ).float()
+        target_one_hot = F.one_hot(
+            target.long(),
+            num_classes=NUM_CLASSES
+        ).permute(
+            2,
+            0,
+            1
+        ).float()
 
-    targets_one_hot = targets_one_hot.permute(
-        0, 3, 1, 2
-    ).float()
+        intersection = (
+            pred_one_hot *
+            target_one_hot
+        ).sum(
+            dim=(1, 2)
+        )
 
-    intersection = (
-        preds_one_hot *
-        targets_one_hot
-    ).sum(
-        dim=(0, 2, 3)
-    )
+        union = (
+            pred_one_hot.sum(dim=(1, 2))
+            +
+            target_one_hot.sum(dim=(1, 2))
+            -
+            intersection
+        )
 
-    union = (
-        preds_one_hot.sum(dim=(0, 2, 3))
-        +
-        targets_one_hot.sum(dim=(0, 2, 3))
-        -
-        intersection
-    )
+        iou = (
+            intersection + smooth
+        ) / (
+            union + smooth
+        )
 
+        valid_classes = (
+            target_one_hot.sum(
+                dim=(1, 2)
+            ) > 0
+        )
 
-    iou = (
-        intersection + smooth
-    ) / (
-        union + smooth
-    )
+        # Ignore background
+        valid_classes[0] = False
 
-    valid_classes = (
-        targets_one_hot.sum(
-            dim=(0, 2, 3)
-        ) > 0
-    )
+        iou = iou[valid_classes]
 
-    valid_classes[0] = False
+        if len(iou) > 0:
 
-    iou = iou[valid_classes]
+            image_scores.append(
+                iou.mean()
+            )
 
+    if len(image_scores) == 0:
 
+        return 0.0
 
-
-
-    return iou.mean().item()
+    return torch.stack(
+        image_scores
+    ).mean().item()
