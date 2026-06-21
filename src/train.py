@@ -4,7 +4,7 @@ from torch.utils.tensorboard import SummaryWriter
 
 from src.datasets.dataloader_setup import create_dataloaders
 from src.models.unet import UNet
-from src.losses.dice_loss import DiceLoss
+from src.losses.combined_loss import CombinedLoss
 from src.training.train_one_epoch import train_one_epoch
 from src.training.validate_one_epoch import validate_one_epoch
 
@@ -94,7 +94,7 @@ print(f"Using device: {device}")
 
 model = UNet().to(device)
 
-criterion = DiceLoss()
+criterion = CombinedLoss()
 
 optimizer = torch.optim.Adam(
     model.parameters(),
