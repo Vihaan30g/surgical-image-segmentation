@@ -1,5 +1,3 @@
-from pathlib import Path
-
 import cv2
 import numpy as np
 
@@ -15,12 +13,23 @@ class CholecSegDataset(Dataset):
         self,
         image_paths,
         mask_paths,
+        video_ids,
         transforms=None
     ):
+        """
+        image_paths : list of Path objects, one per frame
+        mask_paths  : list of Path objects, parallel to image_paths
+        video_ids   : list of str, e.g. "video01", parallel to image_paths.
+                      Needed by VideoBalancedSampler to know which video
+                      each index belongs to.
+        transforms  : albumentations Compose pipeline
+        """
 
         self.image_paths = image_paths
 
         self.mask_paths = mask_paths
+
+        self.video_ids = video_ids
 
         self.transforms = transforms
 
@@ -60,15 +69,19 @@ class CholecSegDataset(Dataset):
             cv2.COLOR_BGR2RGB
         )
 
-        # all channels identical
-        # so extract first channel
+        # All three channels are identical in
+        # watershed masks — extract channel 0.
 
         mask = mask[:, :, 0]
 
 
         # =====================================
-        # CONVERT RAW VALUES TO CLASS IDS
+        # REMAP RAW VALUES → CLASS IDS
         # =====================================
+        #
+        # Watershed masks store raw pixel values
+        # like 80, 17, 33 — not sequential IDs.
+        # RAW_TO_CLASS maps them to 0–12.
 
         class_mask = np.zeros_like(mask)
 
@@ -80,6 +93,11 @@ class CholecSegDataset(Dataset):
         # =====================================
         # APPLY TRANSFORMS
         # =====================================
+        #
+        # Albumentations applies spatial ops
+        # (flip, rotate, elastic) identically to
+        # both image and mask. Color ops only
+        # apply to the image.
 
         if self.transforms is not None:
 
@@ -94,4 +112,3 @@ class CholecSegDataset(Dataset):
 
 
         return image, class_mask
-
