@@ -9,29 +9,6 @@ def train_one_epoch(
     optimizer,
     device
 ):
-    """
-    Run one full training epoch.
-
-    The dataloader uses VideoBalancedSampler,
-    so each batch already contains frames from
-    multiple different surgical videos. No
-    changes needed here — the diversity comes
-    from the sampler upstream.
-
-    Returns:
-        (epoch_loss, epoch_dice, epoch_iou, epoch_acc)
-        All are scalar floats, averaged over all
-        batches in the epoch.
-    """
-
-    # =====================================
-    # TRAIN MODE
-    # =====================================
-    #
-    # model.train() activates:
-    # - Dropout2d (randomly drops channels)
-    # - GroupNorm in training mode
-    # Both are critical for regularization.
 
     model.train()
 
@@ -40,116 +17,55 @@ def train_one_epoch(
     running_iou  = 0.0
     running_acc  = 0.0
 
-
-    # =====================================
-    # LOOP OVER BATCHES
-    # =====================================
-
-    for images, masks in dataloader:
-
-
-        # =================================
-        # MOVE TO DEVICE
-        # =================================
+    for batch_idx, (images, masks) in enumerate(dataloader):
 
         images = images.to(device)
         masks  = masks.to(device)
 
-
-        # =================================
-        # CLEAR OLD GRADIENTS
-        # =================================
-
         optimizer.zero_grad()
 
-
-        # =================================
-        # FORWARD PASS
-        # =================================
-
         outputs = model(images)
-        # outputs: [B, 13, 256, 256] — raw logits
-
-
-        # =================================
-        # LOSS
-        # =================================
 
         loss = criterion(outputs, masks)
 
+        # =====================================
+        # NaN GUARD
+        # =====================================
+        # If loss is NaN, something exploded.
+        # Raise immediately with useful context
+        # rather than silently accumulating NaN
+        # for the whole epoch.
 
-        # =================================
-        # METRICS
-        # =================================
-        #
-        # calculate_metrics uses hard argmax
-        # predictions (not softmax probs) to
-        # compute Dice, IoU, and pixel accuracy.
-        # Computed with torch.no_grad() not
-        # needed here since we detach inside,
-        # but the loss.backward() call below
-        # only touches the loss graph.
+        if torch.isnan(loss):
+            raise RuntimeError(
+                f"NaN loss at batch {batch_idx}. "
+                f"Check class weights, learning rate, "
+                f"or gradient magnitudes. "
+                f"Output range: [{outputs.min():.2f}, {outputs.max():.2f}]"
+            )
 
-        acc, dice, iou = calculate_metrics(
-            outputs, masks
-        )
+        acc, dice, iou = calculate_metrics(outputs, masks)
 
         running_acc  += acc
         running_dice += dice
         running_iou  += iou
 
-
-        # =================================
-        # BACKPROPAGATION
-        # =================================
-
         loss.backward()
-
-
-        # =================================
-        # GRADIENT CLIPPING
-        # =================================
-        #
-        # Clips gradient norm to 1.0.
-        # Prevents occasional exploding
-        # gradients that can destabilize
-        # training, especially early on when
-        # the model is far from convergence.
 
         torch.nn.utils.clip_grad_norm_(
             model.parameters(),
             max_norm=1.0
         )
 
-
-        # =================================
-        # WEIGHT UPDATE
-        # =================================
-
         optimizer.step()
-
-
-        # =================================
-        # LOSS ACCUMULATION
-        # =================================
 
         running_loss += loss.item()
 
-
-    # =====================================
-    # EPOCH AVERAGES
-    # =====================================
-
     n = len(dataloader)
 
-    epoch_loss = running_loss / n
-    epoch_dice = running_dice / n
-    epoch_iou  = running_iou  / n
-    epoch_acc  = running_acc  / n
-
     return (
-        epoch_loss,
-        epoch_dice,
-        epoch_iou,
-        epoch_acc
+        running_loss / n,
+        running_dice / n,
+        running_iou  / n,
+        running_acc  / n,
     )
