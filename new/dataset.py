@@ -63,22 +63,21 @@ def get_train_transforms() -> A.Compose:
             # --- Spatial transforms (applied identically to image + mask) ---
             A.HorizontalFlip(p=0.5),
             A.VerticalFlip(p=0.5),
-            A.OneOf(
-                [
-                    A.RandomRotate90(p=1.0),
-                    A.ShiftScaleRotate(
-                        shift_limit=0.0625, scale_limit=0.1, rotate_limit=45,
-                        border_mode=cv2.BORDER_CONSTANT, value=0, mask_value=0,
-                        p=1.0,
-                    ),
-                ],
+            # NOTE: RandomRotate90 is intentionally NOT used here — on a
+            # non-square image (288x512) a 90/270 degree rotation swaps H
+            # and W, producing inconsistent tensor shapes across a batch
+            # and breaking collation. ShiftScaleRotate covers rotation
+            # augmentation instead while always preserving output size.
+            A.ShiftScaleRotate(
+                shift_limit=0.0625, scale_limit=0.1, rotate_limit=45,
+                border_mode=cv2.BORDER_CONSTANT,
                 p=0.5,
             ),
             A.OneOf(
                 [
                     A.ElasticTransform(
-                        alpha=1, sigma=50, alpha_affine=50,
-                        border_mode=cv2.BORDER_CONSTANT, value=0, mask_value=0,
+                        alpha=1, sigma=50,
+                        border_mode=cv2.BORDER_CONSTANT,
                         p=1.0,
                     ),
                     A.GridDistortion(p=1.0),
