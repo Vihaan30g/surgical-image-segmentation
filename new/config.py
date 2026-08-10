@@ -11,10 +11,26 @@ import torch
 
 # --------------------------------------------------------------------------
 # 1. PATHS
+#
+# Drive is now mounted OUTSIDE this codebase (a manual `drive.mount(...)`
+# cell run once at the top of the Colab notebook, before cloning/running
+# any of this code). This code never calls drive.mount() itself.
+#
+# - DATA_ROOT lives on the local Colab VM disk (fast local SSD), populated
+#   by downloading the dataset directly from Kaggle inside Colab.
+# - CHECKPOINT_DIR / VIS_DIR still point into the mounted Drive so training
+#   progress (checkpoints + visualizations) survives runtime disconnects.
 # --------------------------------------------------------------------------
 DRIVE_ROOT = "/content/drive/MyDrive/surgical-image-segmentation"
 
-DATA_ROOT = os.path.join(DRIVE_ROOT, "data", "archive")
+# Local (non-Drive) path where the Kaggle dataset is downloaded/extracted
+# inside the Colab VM. Adjust KAGGLE_DATASET_SLUG below if your Kaggle
+# dataset identifier differs.
+LOCAL_DATA_ROOT = "/content/data"
+DATA_ROOT = os.path.join(LOCAL_DATA_ROOT, "archive")
+KAGGLE_DATASET_SLUG = "newslab/cholecseg8k"  # kaggle datasets download -d <slug>
+
+# Results (checkpoints + visualizations) persist to Drive.
 CHECKPOINT_DIR = os.path.join(DRIVE_ROOT, "checkpoints")
 CHECKPOINT_LATEST = os.path.join(CHECKPOINT_DIR, "checkpoint_latest.pth")
 CHECKPOINT_BEST = os.path.join(CHECKPOINT_DIR, "checkpoint_best.pth")

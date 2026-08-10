@@ -41,20 +41,34 @@ def set_seed(seed: int = config.SEED):
 
 
 # --------------------------------------------------------------------------
-# Colab / Google Drive setup
+# Environment checks
+#
+# NOTE: Google Drive is mounted OUTSIDE this script — run
+#   from google.colab import drive
+#   drive.mount('/content/drive')
+# in its own notebook cell BEFORE running train.py (see README.md). This
+# function only verifies that Drive is mounted and that the Kaggle dataset
+# has already been downloaded to config.DATA_ROOT; it does not mount
+# anything or download anything itself.
 # --------------------------------------------------------------------------
-def mount_drive_if_needed():
-    try:
-        from google.colab import drive  # only importable inside Colab
-        if not os.path.isdir("/content/drive/MyDrive"):
-            drive.mount("/content/drive")
-        else:
-            print("Google Drive already mounted.")
-    except ImportError:
-        print("Not running in Colab (google.colab not importable) - skipping drive mount.")
+def check_environment_ready():
+    if not os.path.isdir("/content/drive/MyDrive"):
+        raise RuntimeError(
+            "Google Drive is not mounted at /content/drive/MyDrive. "
+            "Run `drive.mount('/content/drive')` in a notebook cell first "
+            "(see README.md), then re-run this script."
+        )
+
+    if not os.path.isdir(config.DATA_ROOT):
+        raise RuntimeError(
+            f"Dataset not found at {config.DATA_ROOT}. Download/extract the "
+            "Kaggle dataset into that path first (see README.md for the "
+            "kaggle CLI commands)."
+        )
 
     os.makedirs(config.CHECKPOINT_DIR, exist_ok=True)
     os.makedirs(config.VIS_DIR, exist_ok=True)
+    print("Environment check passed: Drive mounted, dataset found, output dirs ready.")
 
 
 # --------------------------------------------------------------------------
@@ -236,7 +250,7 @@ def validate_one_epoch(model, dataloader, criterion, device, epoch,
 # --------------------------------------------------------------------------
 def main():
     set_seed(config.SEED)
-    mount_drive_if_needed()
+    check_environment_ready()
 
     device = config.DEVICE
     print(f"Using device: {device}")
