@@ -188,7 +188,7 @@ def train_one_epoch(model, dataloader, criterion, optimizer, device, epoch):
 
 @torch.no_grad()
 def validate_one_epoch(model, dataloader, criterion, device, epoch,
-                        fixed_vis_indices=None, vis_dataset=None):
+                        num_vis_samples=None, vis_dataset=None):
     model.eval()
     running_loss = 0.0
     num_batches = 0
@@ -218,12 +218,19 @@ def validate_one_epoch(model, dataloader, criterion, device, epoch,
     print(f"  Mean IoU:  {mean_iou:.4f}")
     metric_accum.print_class_wise_dice(dice_per_class)
 
-    # --- Export fixed visualization samples ---
-    if fixed_vis_indices is not None and vis_dataset is not None:
+    # --- Export RANDOM visualization samples (different every epoch) ---
+    if num_vis_samples is not None and vis_dataset is not None:
         epoch_vis_dir = os.path.join(config.VIS_DIR, f"epoch_{epoch}")
         os.makedirs(epoch_vis_dir, exist_ok=True)
 
-        for sample_idx in fixed_vis_indices:
+        # fresh random sample each epoch call — uses the global `random`
+        # module (seeded once at program start in set_seed), so the
+        # sequence of epochs is still reproducible run-to-run, but each
+        # epoch gets a *different* set of indices from the last.
+        n = min(num_vis_samples, len(vis_dataset))
+        vis_indices = random.sample(range(len(vis_dataset)), k=n)
+
+        for sample_idx in vis_indices:
             sample = vis_dataset[sample_idx]
             image = sample["image"].unsqueeze(0).to(device)
             gt_mask = sample["mask"]
@@ -234,7 +241,7 @@ def validate_one_epoch(model, dataloader, criterion, device, epoch,
 
             save_visual_grid(sample["image"], gt_mask, pred_mask, epoch_vis_dir, frame_id)
 
-        print(f"  Saved visualizations to: {epoch_vis_dir}")
+        print(f"  Saved visualizations to: {epoch_vis_dir} (indices: {vis_indices})")
 
     return {
         "val_loss": running_loss / max(num_batches, 1),
@@ -243,7 +250,6 @@ def validate_one_epoch(model, dataloader, criterion, device, epoch,
         "dice_per_class": dice_per_class,
         "iou_per_class": iou_per_class,
     }
-
 
 # --------------------------------------------------------------------------
 # Main
@@ -304,7 +310,7 @@ def main():
         train_metrics = train_one_epoch(model, train_loader, criterion, optimizer, device, epoch)
         val_metrics = validate_one_epoch(
             model, val_loader, criterion, device, epoch,
-            fixed_vis_indices=fixed_vis_indices, vis_dataset=val_dataset,
+            num_vis_samples=config.NUM_VIS_SAMPLES, vis_dataset=val_dataset,
         )
 
         scheduler.step()
