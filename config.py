@@ -30,10 +30,9 @@ DRIVE_ROOT = "/content/drive/MyDrive/surgical-image-segmentation"
 # Your data was found at <repo_root>/data/archive (confirmed via `!pwd`
 # + `!ls ./data/archive`), so LOCAL_DATA_ROOT points at <repo_root>/data.
 # Adjust KAGGLE_DATASET_SLUG below if your Kaggle dataset identifier differs.
-LOCAL_DATA_ROOT = "/content/data"
+_REPO_ROOT = os.path.dirname(os.path.abspath(__file__))
+LOCAL_DATA_ROOT = os.path.join(_REPO_ROOT, "data")
 DATA_ROOT = os.path.join(LOCAL_DATA_ROOT, "archive")
-
-
 KAGGLE_DATASET_SLUG = "newslab/cholecseg8k"  # kaggle datasets download -d <slug>
 
 # Results (checkpoints + visualizations) persist to Drive.
@@ -43,7 +42,17 @@ CHECKPOINT_BEST = os.path.join(CHECKPOINT_DIR, "checkpoint_best.pth")
 VIS_DIR = os.path.join(DRIVE_ROOT, "visualizations")
 
 # --------------------------------------------------------------------------
-# 2. DATASET SPLITS (VIDEO-LEVEL, to prevent frame leakage)
+# 2. DATASET SPLITS
+#
+# NOTE: these TRAIN_VIDEOS/VAL_VIDEOS/TEST_VIDEOS lists are now used ONLY
+# by generate_clip_split.py (to know which raw video folders to scan). The
+# actual train/val/test assignment used by dataset.py / train.py comes from
+# splits.py (TRAIN_CLIPS / VAL_CLIPS / TEST_CLIPS), which is CLIP-level, not
+# whole-video-level — whole-video splitting starved several rare classes
+# (liver_ligament: 0 training frames; connective_tissue, blood, hepatic_vein:
+# 0 validation frames) because those classes each only occur in 1-2 of the
+# 17 source videos. Regenerate splits.py by running generate_clip_split.py
+# whenever these video lists change.
 # --------------------------------------------------------------------------
 TRAIN_VIDEOS = [
     "video01", "video12", "video18", "video20", "video24", "video26",
@@ -129,6 +138,12 @@ FOCAL_WEIGHT = 0.5
 DICE_WEIGHT = 0.5
 FOCAL_GAMMA = 2.0
 FOCAL_ALPHA = 0.25
+
+# Per-class weights (inverse pixel frequency, normalized, capped at 20.0)
+# for weighting FocalLoss/DiceLoss toward rare classes. Computed by
+# compute_class_weights.py — REPLACE THIS PLACEHOLDER with that script's
+# real output before training, or class-weighting has no effect.
+CLASS_WEIGHTS = None  # e.g. [0.15, 1.2, 0.3, ..., 20.0]  (13 values)
 
 # --------------------------------------------------------------------------
 # 8. MODEL ARCHITECTURE

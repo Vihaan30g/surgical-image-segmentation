@@ -4,665 +4,1141 @@ Using device: cuda
   original_init(self, **validated_kwargs)
 Train samples: 3360 | Val samples: 200
 No existing checkpoint found. Starting training from scratch.
-Epoch 0 [train]:  60% 250/420 [04:26<03:00,  1.06s/it, loss=0.447]
-Epoch 0 [val]: 100% 25/25 [00:14<00:00,  1.75it/s, val_loss=0.441]
+Epoch 0 [train]:  60% 250/420 [04:28<03:02,  1.07s/it, loss=0.379]
+Epoch 0 [val]: 100% 25/25 [00:12<00:00,  1.95it/s, val_loss=0.391]
 
 Epoch 0 Validation Summary:
-  Val Loss:  0.4762
-  Mean Dice: 0.6428
-  Mean IoU:  0.6205
+  Val Loss:  0.4929
+  Mean Dice: 0.3820
+  Mean IoU:  0.2872
 Class-wise Dice scores:
-  [ 0] background                  : 0.9617
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : N/A (absent)
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
+  [ 0] background                  : 0.9541
+  [ 1] abdominal_wall              : 0.2517
+  [ 2] liver                       : 0.5168
+  [ 3] gastrointestinal_tract      : 0.3215
+  [ 4] fat                         : 0.8138
+  [ 5] grasper                     : 0.3595
+  [ 6] connective_tissue           : 0.0000
   [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9666
-  [10] gallbladder                 : N/A (absent)
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.5570
+  [10] gallbladder                 : 0.4272
   [11] hepatic_vein                : N/A (absent)
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_0
-Epoch 0 | train_loss=0.4574 | val_loss=0.4762 | mean_dice=0.6428 | mean_iou=0.6205
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_0 (indices: [163, 28, 6])
+Epoch 0 | train_loss=0.4323 | val_loss=0.4929 | mean_dice=0.3820 | mean_iou=0.2872
 Saved checkpoint at epoch 0 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_best.pth
 Saved checkpoint at epoch 0 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 1 [train]:  62% 259/420 [04:54<03:02,  1.14s/it, loss=0.446]
-Epoch 1 [val]: 100% 25/25 [00:14<00:00,  1.75it/s, val_loss=0.436]
+Epoch 1 [train]:  62% 259/420 [04:45<02:57,  1.10s/it, loss=0.348]
+Epoch 1 [val]: 100% 25/25 [00:13<00:00,  1.79it/s, val_loss=0.397]
 
 Epoch 1 Validation Summary:
-  Val Loss:  0.4772
-  Mean Dice: 0.6320
-  Mean IoU:  0.6008
+  Val Loss:  0.4749
+  Mean Dice: 0.4231
+  Mean IoU:  0.3243
 Class-wise Dice scores:
-  [ 0] background                  : 0.9546
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : N/A (absent)
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
+  [ 0] background                  : 0.9749
+  [ 1] abdominal_wall              : 0.5854
+  [ 2] liver                       : 0.4501
+  [ 3] gastrointestinal_tract      : 0.5507
+  [ 4] fat                         : 0.8294
+  [ 5] grasper                     : 0.3408
+  [ 6] connective_tissue           : 0.0000
   [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9414
-  [10] gallbladder                 : N/A (absent)
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.3355
+  [10] gallbladder                 : 0.5878
   [11] hepatic_vein                : N/A (absent)
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_1
-Epoch 1 | train_loss=0.4482 | val_loss=0.4772 | mean_dice=0.6320 | mean_iou=0.6008
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_1 (indices: [189, 70, 62])
+Epoch 1 | train_loss=0.3660 | val_loss=0.4749 | mean_dice=0.4231 | mean_iou=0.3243
+Saved checkpoint at epoch 1 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_best.pth
 Saved checkpoint at epoch 1 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 2 [train]:  61% 257/420 [04:53<03:05,  1.14s/it, loss=0.437]
-Epoch 2 [val]: 100% 25/25 [00:13<00:00,  1.83it/s, val_loss=0.434]
+Epoch 2 [train]:  61% 257/420 [04:45<03:00,  1.11s/it, loss=0.335]
+Epoch 2 [val]: 100% 25/25 [00:13<00:00,  1.85it/s, val_loss=0.41]
 
 Epoch 2 Validation Summary:
-  Val Loss:  0.4779
-  Mean Dice: 0.6407
-  Mean IoU:  0.6167
+  Val Loss:  0.4811
+  Mean Dice: 0.4313
+  Mean IoU:  0.3302
 Class-wise Dice scores:
-  [ 0] background                  : 0.9603
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : N/A (absent)
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
+  [ 0] background                  : 0.9796
+  [ 1] abdominal_wall              : 0.5782
+  [ 2] liver                       : 0.4630
+  [ 3] gastrointestinal_tract      : 0.4882
+  [ 4] fat                         : 0.8300
+  [ 5] grasper                     : 0.3352
+  [ 6] connective_tissue           : 0.0000
   [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9617
-  [10] gallbladder                 : N/A (absent)
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.5450
+  [10] gallbladder                 : 0.5252
   [11] hepatic_vein                : N/A (absent)
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_2
-Epoch 2 | train_loss=0.4410 | val_loss=0.4779 | mean_dice=0.6407 | mean_iou=0.6167
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_2 (indices: [57, 35, 188])
+Epoch 2 | train_loss=0.3401 | val_loss=0.4811 | mean_dice=0.4313 | mean_iou=0.3302
+Saved checkpoint at epoch 2 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_best.pth
 Saved checkpoint at epoch 2 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 3 [train]:  61% 255/420 [04:50<03:07,  1.14s/it, loss=0.438]
-Epoch 3 [val]: 100% 25/25 [00:14<00:00,  1.77it/s, val_loss=0.428]
+Epoch 3 [train]:  61% 255/420 [04:42<03:02,  1.11s/it, loss=0.318]
+Epoch 3 [val]: 100% 25/25 [00:13<00:00,  1.87it/s, val_loss=0.379]
 
 Epoch 3 Validation Summary:
-  Val Loss:  0.4792
-  Mean Dice: 0.6447
-  Mean IoU:  0.6242
+  Val Loss:  0.4885
+  Mean Dice: 0.3942
+  Mean IoU:  0.2994
 Class-wise Dice scores:
-  [ 0] background                  : 0.9629
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : N/A (absent)
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
-  [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9713
-  [10] gallbladder                 : N/A (absent)
+  [ 0] background                  : 0.9687
+  [ 1] abdominal_wall              : 0.4455
+  [ 2] liver                       : 0.5471
+  [ 3] gastrointestinal_tract      : 0.5011
+  [ 4] fat                         : 0.7886
+  [ 5] grasper                     : 0.3355
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.5252
+  [10] gallbladder                 : 0.6183
   [11] hepatic_vein                : N/A (absent)
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_3
-Epoch 3 | train_loss=0.4379 | val_loss=0.4792 | mean_dice=0.6447 | mean_iou=0.6242
-Saved checkpoint at epoch 3 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_best.pth
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_3 (indices: [26, 173, 189])
+Epoch 3 | train_loss=0.3228 | val_loss=0.4885 | mean_dice=0.3942 | mean_iou=0.2994
 Saved checkpoint at epoch 3 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 4 [train]:  61% 257/420 [04:53<03:06,  1.14s/it, loss=0.437]
-Epoch 4 [val]: 100% 25/25 [00:14<00:00,  1.77it/s, val_loss=0.427]
+Epoch 4 [train]:  61% 257/420 [04:43<03:00,  1.10s/it, loss=0.305]
+Epoch 4 [val]: 100% 25/25 [00:13<00:00,  1.88it/s, val_loss=0.368]
 
 Epoch 4 Validation Summary:
-  Val Loss:  0.4839
-  Mean Dice: 0.6466
-  Mean IoU:  0.6278
+  Val Loss:  0.4850
+  Mean Dice: 0.3963
+  Mean IoU:  0.3084
 Class-wise Dice scores:
-  [ 0] background                  : 0.9644
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : N/A (absent)
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
-  [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9755
-  [10] gallbladder                 : N/A (absent)
-  [11] hepatic_vein                : N/A (absent)
+  [ 0] background                  : 0.9769
+  [ 1] abdominal_wall              : 0.6158
+  [ 2] liver                       : 0.5325
+  [ 3] gastrointestinal_tract      : 0.5191
+  [ 4] fat                         : 0.8359
+  [ 5] grasper                     : 0.4190
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.6147
+  [10] gallbladder                 : 0.6385
+  [11] hepatic_vein                : 0.0000
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_4
-Epoch 4 | train_loss=0.4363 | val_loss=0.4839 | mean_dice=0.6466 | mean_iou=0.6278
-Saved checkpoint at epoch 4 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_best.pth
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_4 (indices: [139, 22, 151])
+Epoch 4 | train_loss=0.3110 | val_loss=0.4850 | mean_dice=0.3963 | mean_iou=0.3084
 Saved checkpoint at epoch 4 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 5 [train]:  60% 252/420 [04:48<03:12,  1.14s/it, loss=0.431]
-Epoch 5 [val]: 100% 25/25 [00:13<00:00,  1.83it/s, val_loss=0.427]
+Epoch 5 [train]:  60% 252/420 [04:37<03:05,  1.10s/it, loss=0.283]
+Epoch 5 [val]: 100% 25/25 [00:13<00:00,  1.90it/s, val_loss=0.386]
 
 Epoch 5 Validation Summary:
-  Val Loss:  0.4844
-  Mean Dice: 0.6473
-  Mean IoU:  0.6292
+  Val Loss:  0.4909
+  Mean Dice: 0.3800
+  Mean IoU:  0.2929
 Class-wise Dice scores:
-  [ 0] background                  : 0.9649
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : N/A (absent)
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
-  [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9771
-  [10] gallbladder                 : N/A (absent)
-  [11] hepatic_vein                : N/A (absent)
+  [ 0] background                  : 0.9725
+  [ 1] abdominal_wall              : 0.4767
+  [ 2] liver                       : 0.5341
+  [ 3] gastrointestinal_tract      : 0.5541
+  [ 4] fat                         : 0.8293
+  [ 5] grasper                     : 0.3674
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.5436
+  [10] gallbladder                 : 0.6616
+  [11] hepatic_vein                : 0.0000
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_5
-Epoch 5 | train_loss=0.4356 | val_loss=0.4844 | mean_dice=0.6473 | mean_iou=0.6292
-Saved checkpoint at epoch 5 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_best.pth
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_5 (indices: [108, 8, 7])
+Epoch 5 | train_loss=0.2984 | val_loss=0.4909 | mean_dice=0.3800 | mean_iou=0.2929
 Saved checkpoint at epoch 5 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 6 [train]:  63% 264/420 [05:00<02:57,  1.14s/it, loss=0.436]
-Epoch 6 [val]: 100% 25/25 [00:13<00:00,  1.83it/s, val_loss=0.427]
+Epoch 6 [train]:  63% 264/420 [04:50<02:51,  1.10s/it, loss=0.265]
+Epoch 6 [val]: 100% 25/25 [00:13<00:00,  1.80it/s, val_loss=0.39]
 
 Epoch 6 Validation Summary:
-  Val Loss:  0.4901
-  Mean Dice: 0.6460
-  Mean IoU:  0.6265
+  Val Loss:  0.5028
+  Mean Dice: 0.4077
+  Mean IoU:  0.3129
 Class-wise Dice scores:
-  [ 0] background                  : 0.9639
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : N/A (absent)
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
+  [ 0] background                  : 0.9823
+  [ 1] abdominal_wall              : 0.4802
+  [ 2] liver                       : 0.5283
+  [ 3] gastrointestinal_tract      : 0.4645
+  [ 4] fat                         : 0.7673
+  [ 5] grasper                     : 0.3816
+  [ 6] connective_tissue           : 0.0000
   [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9740
-  [10] gallbladder                 : N/A (absent)
-  [11] hepatic_vein                : N/A (absent)
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.5973
+  [10] gallbladder                 : 0.6909
+  [11] hepatic_vein                : 0.0000
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_6
-Epoch 6 | train_loss=0.4349 | val_loss=0.4901 | mean_dice=0.6460 | mean_iou=0.6265
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_6 (indices: [23, 55, 59])
+Epoch 6 | train_loss=0.2898 | val_loss=0.5028 | mean_dice=0.4077 | mean_iou=0.3129
 Saved checkpoint at epoch 6 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 7 [train]:  60% 253/420 [04:48<03:10,  1.14s/it, loss=0.437]
-Epoch 7 [val]: 100% 25/25 [00:13<00:00,  1.84it/s, val_loss=0.427]
+Epoch 7 [train]:  60% 253/420 [04:40<03:05,  1.11s/it, loss=0.303]
+Epoch 7 [val]: 100% 25/25 [00:13<00:00,  1.83it/s, val_loss=0.401]
 
 Epoch 7 Validation Summary:
-  Val Loss:  0.4956
-  Mean Dice: 0.6472
-  Mean IoU:  0.6289
+  Val Loss:  0.5058
+  Mean Dice: 0.3722
+  Mean IoU:  0.2877
 Class-wise Dice scores:
-  [ 0] background                  : 0.9648
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : N/A (absent)
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
-  [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9769
-  [10] gallbladder                 : N/A (absent)
-  [11] hepatic_vein                : N/A (absent)
+  [ 0] background                  : 0.9747
+  [ 1] abdominal_wall              : 0.4540
+  [ 2] liver                       : 0.5537
+  [ 3] gastrointestinal_tract      : 0.3698
+  [ 4] fat                         : 0.8302
+  [ 5] grasper                     : 0.3658
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.6350
+  [10] gallbladder                 : 0.6561
+  [11] hepatic_vein                : 0.0000
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_7
-Epoch 7 | train_loss=0.4347 | val_loss=0.4956 | mean_dice=0.6472 | mean_iou=0.6289
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_7 (indices: [129, 154, 6])
+Epoch 7 | train_loss=0.2791 | val_loss=0.5058 | mean_dice=0.3722 | mean_iou=0.2877
 Saved checkpoint at epoch 7 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 8 [train]:  59% 247/420 [04:41<03:17,  1.14s/it, loss=0.434]
-Epoch 8 [val]: 100% 25/25 [00:13<00:00,  1.82it/s, val_loss=0.427]
+Epoch 8 [train]:  59% 247/420 [04:32<03:11,  1.10s/it, loss=0.256]
+Epoch 8 [val]: 100% 25/25 [00:13<00:00,  1.88it/s, val_loss=0.405]
 
 Epoch 8 Validation Summary:
-  Val Loss:  0.4986
-  Mean Dice: 0.6474
-  Mean IoU:  0.6292
+  Val Loss:  0.5079
+  Mean Dice: 0.4079
+  Mean IoU:  0.3141
 Class-wise Dice scores:
-  [ 0] background                  : 0.9650
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : N/A (absent)
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
+  [ 0] background                  : 0.9756
+  [ 1] abdominal_wall              : 0.5363
+  [ 2] liver                       : 0.5502
+  [ 3] gastrointestinal_tract      : 0.4078
+  [ 4] fat                         : 0.8374
+  [ 5] grasper                     : 0.4214
+  [ 6] connective_tissue           : 0.0000
   [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9772
-  [10] gallbladder                 : N/A (absent)
-  [11] hepatic_vein                : N/A (absent)
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.6365
+  [10] gallbladder                 : 0.5302
+  [11] hepatic_vein                : 0.0000
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_8
-Epoch 8 | train_loss=0.4347 | val_loss=0.4986 | mean_dice=0.6474 | mean_iou=0.6292
-Saved checkpoint at epoch 8 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_best.pth
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_8 (indices: [143, 50, 183])
+Epoch 8 | train_loss=0.2707 | val_loss=0.5079 | mean_dice=0.4079 | mean_iou=0.3141
 Saved checkpoint at epoch 8 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 9 [train]:  59% 246/420 [04:40<03:18,  1.14s/it, loss=0.438]
-Epoch 9 [val]: 100% 25/25 [00:13<00:00,  1.83it/s, val_loss=0.427]
+Epoch 9 [train]:  59% 246/420 [04:31<03:11,  1.10s/it, loss=0.253]
+Epoch 9 [val]: 100% 25/25 [00:13<00:00,  1.87it/s, val_loss=0.407]
 
 Epoch 9 Validation Summary:
-  Val Loss:  0.5024
-  Mean Dice: 0.4854
-  Mean IoU:  0.4717
+  Val Loss:  0.5311
+  Mean Dice: 0.3583
+  Mean IoU:  0.2750
 Class-wise Dice scores:
-  [ 0] background                  : 0.9643
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : 0.0000
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
-  [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9773
-  [10] gallbladder                 : N/A (absent)
-  [11] hepatic_vein                : N/A (absent)
+  [ 0] background                  : 0.9786
+  [ 1] abdominal_wall              : 0.4108
+  [ 2] liver                       : 0.5599
+  [ 3] gastrointestinal_tract      : 0.3458
+  [ 4] fat                         : 0.7893
+  [ 5] grasper                     : 0.3311
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.5479
+  [10] gallbladder                 : 0.6952
+  [11] hepatic_vein                : 0.0000
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_9
-Epoch 9 | train_loss=0.4340 | val_loss=0.5024 | mean_dice=0.4854 | mean_iou=0.4717
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_9 (indices: [166, 179, 139])
+Epoch 9 | train_loss=0.2620 | val_loss=0.5311 | mean_dice=0.3583 | mean_iou=0.2750
 Saved checkpoint at epoch 9 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 10 [train]:  60% 252/420 [04:47<03:11,  1.14s/it, loss=0.433]
-Epoch 10 [val]: 100% 25/25 [00:13<00:00,  1.84it/s, val_loss=0.426]
+Epoch 10 [train]:  60% 252/420 [04:38<03:05,  1.10s/it, loss=0.245]
+Epoch 10 [val]: 100% 25/25 [00:13<00:00,  1.86it/s, val_loss=0.403]
 
 Epoch 10 Validation Summary:
-  Val Loss:  0.4997
-  Mean Dice: 0.4849
-  Mean IoU:  0.4707
+  Val Loss:  0.5207
+  Mean Dice: 0.3897
+  Mean IoU:  0.3036
 Class-wise Dice scores:
-  [ 0] background                  : 0.9641
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : 0.0000
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
-  [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9755
-  [10] gallbladder                 : N/A (absent)
-  [11] hepatic_vein                : N/A (absent)
+  [ 0] background                  : 0.9723
+  [ 1] abdominal_wall              : 0.5999
+  [ 2] liver                       : 0.5936
+  [ 3] gastrointestinal_tract      : 0.4074
+  [ 4] fat                         : 0.8112
+  [ 5] grasper                     : 0.3508
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.6425
+  [10] gallbladder                 : 0.6889
+  [11] hepatic_vein                : 0.0000
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_10
-Epoch 10 | train_loss=0.4329 | val_loss=0.4997 | mean_dice=0.4849 | mean_iou=0.4707
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_10 (indices: [107, 56, 114])
+Epoch 10 | train_loss=0.2525 | val_loss=0.5207 | mean_dice=0.3897 | mean_iou=0.3036
 Saved checkpoint at epoch 10 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 11 [train]:  63% 265/420 [05:02<02:57,  1.14s/it, loss=0.425]
-Epoch 11 [val]: 100% 25/25 [00:13<00:00,  1.83it/s, val_loss=0.427]
+Epoch 11 [train]:  63% 265/420 [04:54<02:52,  1.11s/it, loss=0.229]
+Epoch 11 [val]: 100% 25/25 [00:13<00:00,  1.88it/s, val_loss=0.443]
 
 Epoch 11 Validation Summary:
-  Val Loss:  0.5095
-  Mean Dice: 0.4843
-  Mean IoU:  0.4696
+  Val Loss:  0.5382
+  Mean Dice: 0.3914
+  Mean IoU:  0.3053
 Class-wise Dice scores:
-  [ 0] background                  : 0.9634
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : 0.0000
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
-  [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9738
-  [10] gallbladder                 : N/A (absent)
+  [ 0] background                  : 0.9783
+  [ 1] abdominal_wall              : 0.5704
+  [ 2] liver                       : 0.5924
+  [ 3] gastrointestinal_tract      : 0.2019
+  [ 4] fat                         : 0.8184
+  [ 5] grasper                     : 0.2797
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.5817
+  [10] gallbladder                 : 0.6743
   [11] hepatic_vein                : N/A (absent)
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_11
-Epoch 11 | train_loss=0.4336 | val_loss=0.5095 | mean_dice=0.4843 | mean_iou=0.4696
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_11 (indices: [150, 71, 1])
+Epoch 11 | train_loss=0.2475 | val_loss=0.5382 | mean_dice=0.3914 | mean_iou=0.3053
 Saved checkpoint at epoch 11 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 12 [train]:  61% 257/420 [04:53<03:06,  1.14s/it, loss=0.439]
-Epoch 12 [val]: 100% 25/25 [00:13<00:00,  1.86it/s, val_loss=0.426]
+Epoch 12 [train]:  61% 257/420 [04:43<02:59,  1.10s/it, loss=0.295]
+Epoch 12 [val]: 100% 25/25 [00:13<00:00,  1.87it/s, val_loss=0.388]
 
 Epoch 12 Validation Summary:
-  Val Loss:  0.5151
-  Mean Dice: 0.6468
-  Mean IoU:  0.6282
+  Val Loss:  0.5027
+  Mean Dice: 0.3991
+  Mean IoU:  0.3111
 Class-wise Dice scores:
-  [ 0] background                  : 0.9645
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : N/A (absent)
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
-  [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9760
-  [10] gallbladder                 : N/A (absent)
-  [11] hepatic_vein                : N/A (absent)
+  [ 0] background                  : 0.9696
+  [ 1] abdominal_wall              : 0.5427
+  [ 2] liver                       : 0.6028
+  [ 3] gastrointestinal_tract      : 0.5959
+  [ 4] fat                         : 0.8124
+  [ 5] grasper                     : 0.3510
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.6503
+  [10] gallbladder                 : 0.6630
+  [11] hepatic_vein                : 0.0000
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_12
-Epoch 12 | train_loss=0.4327 | val_loss=0.5151 | mean_dice=0.6468 | mean_iou=0.6282
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_12 (indices: [194, 40, 178])
+Epoch 12 | train_loss=0.2388 | val_loss=0.5027 | mean_dice=0.3991 | mean_iou=0.3111
 Saved checkpoint at epoch 12 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 13 [train]:  61% 256/420 [04:53<03:07,  1.14s/it, loss=0.436]
-Epoch 13 [val]: 100% 25/25 [00:13<00:00,  1.88it/s, val_loss=0.426]
+Epoch 13 [train]:  61% 256/420 [04:43<03:01,  1.11s/it, loss=0.171]
+Epoch 13 [val]: 100% 25/25 [00:13<00:00,  1.88it/s, val_loss=0.405]
 
 Epoch 13 Validation Summary:
-  Val Loss:  0.5176
-  Mean Dice: 0.4860
-  Mean IoU:  0.4727
+  Val Loss:  0.5233
+  Mean Dice: 0.3859
+  Mean IoU:  0.2999
 Class-wise Dice scores:
-  [ 0] background                  : 0.9654
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : 0.0000
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
-  [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9785
-  [10] gallbladder                 : N/A (absent)
-  [11] hepatic_vein                : N/A (absent)
+  [ 0] background                  : 0.9750
+  [ 1] abdominal_wall              : 0.5681
+  [ 2] liver                       : 0.6233
+  [ 3] gastrointestinal_tract      : 0.3794
+  [ 4] fat                         : 0.8143
+  [ 5] grasper                     : 0.3724
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.5951
+  [10] gallbladder                 : 0.6887
+  [11] hepatic_vein                : 0.0000
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_13
-Epoch 13 | train_loss=0.4316 | val_loss=0.5176 | mean_dice=0.4860 | mean_iou=0.4727
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_13 (indices: [108, 87, 71])
+Epoch 13 | train_loss=0.2359 | val_loss=0.5233 | mean_dice=0.3859 | mean_iou=0.2999
 Saved checkpoint at epoch 13 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 14 [train]:  61% 257/420 [04:53<03:05,  1.14s/it, loss=0.429]
-Epoch 14 [val]: 100% 25/25 [00:13<00:00,  1.85it/s, val_loss=0.426]
+Epoch 14 [train]:  61% 257/420 [04:44<03:00,  1.11s/it, loss=0.186]
+Epoch 14 [val]: 100% 25/25 [00:13<00:00,  1.85it/s, val_loss=0.372]
 
 Epoch 14 Validation Summary:
-  Val Loss:  0.5189
-  Mean Dice: 0.4864
-  Mean IoU:  0.4736
+  Val Loss:  0.5044
+  Mean Dice: 0.4213
+  Mean IoU:  0.3346
 Class-wise Dice scores:
-  [ 0] background                  : 0.9657
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : 0.0000
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
-  [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9799
-  [10] gallbladder                 : N/A (absent)
-  [11] hepatic_vein                : N/A (absent)
+  [ 0] background                  : 0.9798
+  [ 1] abdominal_wall              : 0.6377
+  [ 2] liver                       : 0.6541
+  [ 3] gastrointestinal_tract      : 0.5278
+  [ 4] fat                         : 0.7969
+  [ 5] grasper                     : 0.4342
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7694
+  [10] gallbladder                 : 0.6771
+  [11] hepatic_vein                : 0.0000
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_14
-Epoch 14 | train_loss=0.4311 | val_loss=0.5189 | mean_dice=0.4864 | mean_iou=0.4736
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_14 (indices: [39, 55, 195])
+Epoch 14 | train_loss=0.2309 | val_loss=0.5044 | mean_dice=0.4213 | mean_iou=0.3346
 Saved checkpoint at epoch 14 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 15 [train]:  61% 257/420 [04:53<03:06,  1.14s/it, loss=0.414]
-Epoch 15 [val]: 100% 25/25 [00:13<00:00,  1.87it/s, val_loss=0.425]
+Epoch 15 [train]:  61% 257/420 [04:44<03:00,  1.11s/it, loss=0.204]
+Epoch 15 [val]: 100% 25/25 [00:13<00:00,  1.91it/s, val_loss=0.414]
 
 Epoch 15 Validation Summary:
-  Val Loss:  0.5276
-  Mean Dice: 0.4862
-  Mean IoU:  0.4731
+  Val Loss:  0.4949
+  Mean Dice: 0.4168
+  Mean IoU:  0.3325
 Class-wise Dice scores:
-  [ 0] background                  : 0.9657
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : 0.0000
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
-  [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9790
-  [10] gallbladder                 : N/A (absent)
-  [11] hepatic_vein                : N/A (absent)
+  [ 0] background                  : 0.9756
+  [ 1] abdominal_wall              : 0.6581
+  [ 2] liver                       : 0.6823
+  [ 3] gastrointestinal_tract      : 0.5664
+  [ 4] fat                         : 0.8262
+  [ 5] grasper                     : 0.3107
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.6546
+  [10] gallbladder                 : 0.7441
+  [11] hepatic_vein                : 0.0000
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_15
-Epoch 15 | train_loss=0.4296 | val_loss=0.5276 | mean_dice=0.4862 | mean_iou=0.4731
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_15 (indices: [86, 26, 23])
+Epoch 15 | train_loss=0.2236 | val_loss=0.4949 | mean_dice=0.4168 | mean_iou=0.3325
 Saved checkpoint at epoch 15 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 16 [train]:  62% 261/420 [04:57<03:01,  1.14s/it, loss=0.428]
-Epoch 16 [val]: 100% 25/25 [00:13<00:00,  1.88it/s, val_loss=0.426]
+Epoch 16 [train]:  62% 261/420 [04:49<02:56,  1.11s/it, loss=0.185]
+Epoch 16 [val]: 100% 25/25 [00:12<00:00,  1.93it/s, val_loss=0.381]
 
 Epoch 16 Validation Summary:
-  Val Loss:  0.5291
-  Mean Dice: 0.4854
-  Mean IoU:  0.4717
+  Val Loss:  0.5205
+  Mean Dice: 0.4175
+  Mean IoU:  0.3320
 Class-wise Dice scores:
-  [ 0] background                  : 0.9649
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : 0.0000
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
-  [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9769
-  [10] gallbladder                 : N/A (absent)
-  [11] hepatic_vein                : N/A (absent)
+  [ 0] background                  : 0.9783
+  [ 1] abdominal_wall              : 0.6565
+  [ 2] liver                       : 0.6737
+  [ 3] gastrointestinal_tract      : 0.4914
+  [ 4] fat                         : 0.8253
+  [ 5] grasper                     : 0.3930
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7253
+  [10] gallbladder                 : 0.6841
+  [11] hepatic_vein                : 0.0000
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_16
-Epoch 16 | train_loss=0.4285 | val_loss=0.5291 | mean_dice=0.4854 | mean_iou=0.4717
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_16 (indices: [97, 24, 91])
+Epoch 16 | train_loss=0.2231 | val_loss=0.5205 | mean_dice=0.4175 | mean_iou=0.3320
 Saved checkpoint at epoch 16 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 17 [train]:  60% 251/420 [04:46<03:12,  1.14s/it, loss=0.431]
-Epoch 17 [val]: 100% 25/25 [00:13<00:00,  1.84it/s, val_loss=0.426]
+Epoch 17 [train]:  60% 251/420 [04:38<03:07,  1.11s/it, loss=0.24]
+Epoch 17 [val]: 100% 25/25 [00:12<00:00,  1.93it/s, val_loss=0.414]
 
 Epoch 17 Validation Summary:
-  Val Loss:  0.5361
-  Mean Dice: 0.4863
-  Mean IoU:  0.4733
+  Val Loss:  0.5348
+  Mean Dice: 0.3947
+  Mean IoU:  0.3135
 Class-wise Dice scores:
-  [ 0] background                  : 0.9657
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : 0.0000
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
-  [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9793
-  [10] gallbladder                 : N/A (absent)
-  [11] hepatic_vein                : N/A (absent)
+  [ 0] background                  : 0.9744
+  [ 1] abdominal_wall              : 0.6904
+  [ 2] liver                       : 0.6404
+  [ 3] gastrointestinal_tract      : 0.2322
+  [ 4] fat                         : 0.8199
+  [ 5] grasper                     : 0.3841
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.6958
+  [10] gallbladder                 : 0.6932
+  [11] hepatic_vein                : 0.0000
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_17
-Epoch 17 | train_loss=0.4282 | val_loss=0.5361 | mean_dice=0.4863 | mean_iou=0.4733
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_17 (indices: [88, 154, 67])
+Epoch 17 | train_loss=0.2128 | val_loss=0.5348 | mean_dice=0.3947 | mean_iou=0.3135
 Saved checkpoint at epoch 17 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 18 [train]:  60% 251/420 [04:46<03:12,  1.14s/it, loss=0.397]
-Epoch 18 [val]: 100% 25/25 [00:13<00:00,  1.88it/s, val_loss=0.426]
+Epoch 18 [train]:  60% 251/420 [04:37<03:07,  1.11s/it, loss=0.225]
+Epoch 18 [val]: 100% 25/25 [00:12<00:00,  1.93it/s, val_loss=0.438]
 
 Epoch 18 Validation Summary:
-  Val Loss:  0.5357
-  Mean Dice: 0.4860
-  Mean IoU:  0.4729
+  Val Loss:  0.5373
+  Mean Dice: 0.4053
+  Mean IoU:  0.3277
 Class-wise Dice scores:
-  [ 0] background                  : 0.9653
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : 0.0000
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
-  [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9789
-  [10] gallbladder                 : N/A (absent)
-  [11] hepatic_vein                : N/A (absent)
+  [ 0] background                  : 0.9723
+  [ 1] abdominal_wall              : 0.7049
+  [ 2] liver                       : 0.6368
+  [ 3] gastrointestinal_tract      : 0.1291
+  [ 4] fat                         : 0.8368
+  [ 5] grasper                     : 0.5517
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7981
+  [10] gallbladder                 : 0.6388
+  [11] hepatic_vein                : 0.0000
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_18
-Epoch 18 | train_loss=0.4259 | val_loss=0.5357 | mean_dice=0.4860 | mean_iou=0.4729
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_18 (indices: [11, 186, 117])
+Epoch 18 | train_loss=0.2164 | val_loss=0.5373 | mean_dice=0.4053 | mean_iou=0.3277
 Saved checkpoint at epoch 18 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 19 [train]:  59% 248/420 [04:43<03:16,  1.14s/it, loss=0.402]
-Epoch 19 [val]: 100% 25/25 [00:13<00:00,  1.85it/s, val_loss=0.426]
+Epoch 19 [train]:  59% 248/420 [04:34<03:10,  1.11s/it, loss=0.21]
+Epoch 19 [val]: 100% 25/25 [00:12<00:00,  1.94it/s, val_loss=0.482]
 
 Epoch 19 Validation Summary:
-  Val Loss:  0.5371
-  Mean Dice: 0.4861
-  Mean IoU:  0.4729
+  Val Loss:  0.5419
+  Mean Dice: 0.3954
+  Mean IoU:  0.3183
 Class-wise Dice scores:
-  [ 0] background                  : 0.9654
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : 0.0000
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
-  [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9790
-  [10] gallbladder                 : N/A (absent)
-  [11] hepatic_vein                : N/A (absent)
+  [ 0] background                  : 0.9771
+  [ 1] abdominal_wall              : 0.6777
+  [ 2] liver                       : 0.6337
+  [ 3] gastrointestinal_tract      : 0.1009
+  [ 4] fat                         : 0.8364
+  [ 5] grasper                     : 0.4958
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7659
+  [10] gallbladder                 : 0.6523
+  [11] hepatic_vein                : 0.0000
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_19
-Epoch 19 | train_loss=0.4265 | val_loss=0.5371 | mean_dice=0.4861 | mean_iou=0.4729
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_19 (indices: [137, 31, 96])
+Epoch 19 | train_loss=0.2074 | val_loss=0.5419 | mean_dice=0.3954 | mean_iou=0.3183
 Saved checkpoint at epoch 19 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 20 [train]:  61% 255/420 [04:51<03:08,  1.15s/it, loss=0.432]
-Epoch 20 [val]: 100% 25/25 [00:13<00:00,  1.84it/s, val_loss=0.425]
+Epoch 20 [train]:  61% 255/420 [04:42<03:03,  1.11s/it, loss=0.209]
+Epoch 20 [val]: 100% 25/25 [00:13<00:00,  1.84it/s, val_loss=0.384]
 
 Epoch 20 Validation Summary:
-  Val Loss:  0.5354
-  Mean Dice: 0.4870
-  Mean IoU:  0.4747
+  Val Loss:  0.5098
+  Mean Dice: 0.4246
+  Mean IoU:  0.3376
 Class-wise Dice scores:
-  [ 0] background                  : 0.9663
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : 0.0000
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
-  [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9816
-  [10] gallbladder                 : N/A (absent)
-  [11] hepatic_vein                : N/A (absent)
+  [ 0] background                  : 0.9773
+  [ 1] abdominal_wall              : 0.6092
+  [ 2] liver                       : 0.6553
+  [ 3] gastrointestinal_tract      : 0.5024
+  [ 4] fat                         : 0.8018
+  [ 5] grasper                     : 0.4970
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7571
+  [10] gallbladder                 : 0.7203
+  [11] hepatic_vein                : 0.0000
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_20
-Epoch 20 | train_loss=0.4262 | val_loss=0.5354 | mean_dice=0.4870 | mean_iou=0.4747
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_20 (indices: [20, 141, 75])
+Epoch 20 | train_loss=0.2040 | val_loss=0.5098 | mean_dice=0.4246 | mean_iou=0.3376
 Saved checkpoint at epoch 20 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 21 [train]:  60% 252/420 [04:47<03:11,  1.14s/it, loss=0.428]
-Epoch 21 [val]: 100% 25/25 [00:13<00:00,  1.87it/s, val_loss=0.426]
+Epoch 21 [train]:  60% 252/420 [04:40<03:06,  1.11s/it, loss=0.217]
+Epoch 21 [val]: 100% 25/25 [00:12<00:00,  1.93it/s, val_loss=0.415]
 
 Epoch 21 Validation Summary:
-  Val Loss:  0.5372
-  Mean Dice: 0.4868
-  Mean IoU:  0.4744
+  Val Loss:  0.5212
+  Mean Dice: 0.4186
+  Mean IoU:  0.3355
 Class-wise Dice scores:
-  [ 0] background                  : 0.9663
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : 0.0000
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
-  [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9810
-  [10] gallbladder                 : N/A (absent)
-  [11] hepatic_vein                : N/A (absent)
+  [ 0] background                  : 0.9704
+  [ 1] abdominal_wall              : 0.7119
+  [ 2] liver                       : 0.6458
+  [ 3] gastrointestinal_tract      : 0.3230
+  [ 4] fat                         : 0.8275
+  [ 5] grasper                     : 0.4881
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7450
+  [10] gallbladder                 : 0.7301
+  [11] hepatic_vein                : 0.0000
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_21
-Epoch 21 | train_loss=0.4247 | val_loss=0.5372 | mean_dice=0.4868 | mean_iou=0.4744
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_21 (indices: [160, 158, 92])
+Epoch 21 | train_loss=0.1965 | val_loss=0.5212 | mean_dice=0.4186 | mean_iou=0.3355
 Saved checkpoint at epoch 21 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 22 [train]:  62% 261/420 [04:57<03:01,  1.14s/it, loss=0.409]
-Epoch 22 [val]: 100% 25/25 [00:13<00:00,  1.83it/s, val_loss=0.425]
+Epoch 22 [train]:  62% 261/420 [04:48<02:55,  1.11s/it, loss=0.184]
+Epoch 22 [val]: 100% 25/25 [00:13<00:00,  1.82it/s, val_loss=0.439]
 
 Epoch 22 Validation Summary:
-  Val Loss:  0.5355
-  Mean Dice: 0.4869
-  Mean IoU:  0.4744
+  Val Loss:  0.5099
+  Mean Dice: 0.4145
+  Mean IoU:  0.3283
 Class-wise Dice scores:
-  [ 0] background                  : 0.9662
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : 0.0000
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
-  [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9813
-  [10] gallbladder                 : N/A (absent)
-  [11] hepatic_vein                : N/A (absent)
+  [ 0] background                  : 0.9803
+  [ 1] abdominal_wall              : 0.6938
+  [ 2] liver                       : 0.6560
+  [ 3] gastrointestinal_tract      : 0.5013
+  [ 4] fat                         : 0.8024
+  [ 5] grasper                     : 0.3797
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.6624
+  [10] gallbladder                 : 0.7123
+  [11] hepatic_vein                : 0.0000
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_22
-Epoch 22 | train_loss=0.4253 | val_loss=0.5355 | mean_dice=0.4869 | mean_iou=0.4744
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_22 (indices: [147, 49, 180])
+Epoch 22 | train_loss=0.2007 | val_loss=0.5099 | mean_dice=0.4145 | mean_iou=0.3283
 Saved checkpoint at epoch 22 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 23 [train]:  62% 262/420 [04:59<03:00,  1.14s/it, loss=0.428]
-Epoch 23 [val]: 100% 25/25 [00:13<00:00,  1.85it/s, val_loss=0.425]
+Epoch 23 [train]:  62% 262/420 [04:49<02:54,  1.11s/it, loss=0.18]
+Epoch 23 [val]: 100% 25/25 [00:14<00:00,  1.78it/s, val_loss=0.403]
 
 Epoch 23 Validation Summary:
-  Val Loss:  0.5406
-  Mean Dice: 0.4874
-  Mean IoU:  0.4755
+  Val Loss:  0.5012
+  Mean Dice: 0.4423
+  Mean IoU:  0.3581
 Class-wise Dice scores:
-  [ 0] background                  : 0.9667
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : 0.0000
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
-  [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9829
-  [10] gallbladder                 : N/A (absent)
-  [11] hepatic_vein                : N/A (absent)
+  [ 0] background                  : 0.9786
+  [ 1] abdominal_wall              : 0.6977
+  [ 2] liver                       : 0.6954
+  [ 3] gastrointestinal_tract      : 0.5601
+  [ 4] fat                         : 0.8059
+  [ 5] grasper                     : 0.4656
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7877
+  [10] gallbladder                 : 0.7586
+  [11] hepatic_vein                : 0.0000
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_23
-Epoch 23 | train_loss=0.4239 | val_loss=0.5406 | mean_dice=0.4874 | mean_iou=0.4755
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_23 (indices: [17, 11, 169])
+Epoch 23 | train_loss=0.1947 | val_loss=0.5012 | mean_dice=0.4423 | mean_iou=0.3581
+Saved checkpoint at epoch 23 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_best.pth
 Saved checkpoint at epoch 23 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 24 [train]:  60% 251/420 [04:46<03:12,  1.14s/it, loss=0.428]
-Epoch 24 [val]: 100% 25/25 [00:13<00:00,  1.85it/s, val_loss=0.425]
+Epoch 24 [train]:  60% 251/420 [04:38<03:07,  1.11s/it, loss=0.213]
+Epoch 24 [val]: 100% 25/25 [00:13<00:00,  1.85it/s, val_loss=0.427]
 
 Epoch 24 Validation Summary:
-  Val Loss:  0.5466
-  Mean Dice: 0.6485
-  Mean IoU:  0.6313
+  Val Loss:  0.5289
+  Mean Dice: 0.4069
+  Mean IoU:  0.3177
 Class-wise Dice scores:
-  [ 0] background                  : 0.9658
-  [ 1] abdominal_wall              : N/A (absent)
-  [ 2] liver                       : N/A (absent)
-  [ 3] gastrointestinal_tract      : N/A (absent)
-  [ 4] fat                         : N/A (absent)
-  [ 5] grasper                     : N/A (absent)
-  [ 6] connective_tissue           : N/A (absent)
-  [ 7] blood                       : N/A (absent)
-  [ 8] cystic_duct                 : N/A (absent)
-  [ 9] l_hook_electrocautery       : 0.9796
-  [10] gallbladder                 : N/A (absent)
+  [ 0] background                  : 0.9789
+  [ 1] abdominal_wall              : 0.6151
+  [ 2] liver                       : 0.6518
+  [ 3] gastrointestinal_tract      : 0.4862
+  [ 4] fat                         : 0.7884
+  [ 5] grasper                     : 0.4706
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.6816
+  [10] gallbladder                 : 0.6177
+  [11] hepatic_vein                : 0.0000
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_24 (indices: [58, 197, 74])
+Epoch 24 | train_loss=0.1978 | val_loss=0.5289 | mean_dice=0.4069 | mean_iou=0.3177
+Saved checkpoint at epoch 24 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 25 [train]:  60% 254/420 [04:41<03:03,  1.11s/it, loss=0.148]
+Epoch 25 [val]: 100% 25/25 [00:13<00:00,  1.80it/s, val_loss=0.397]
+
+Epoch 25 Validation Summary:
+  Val Loss:  0.4968
+  Mean Dice: 0.4410
+  Mean IoU:  0.3555
+Class-wise Dice scores:
+  [ 0] background                  : 0.9789
+  [ 1] abdominal_wall              : 0.6923
+  [ 2] liver                       : 0.6843
+  [ 3] gastrointestinal_tract      : 0.6032
+  [ 4] fat                         : 0.8159
+  [ 5] grasper                     : 0.4726
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7457
+  [10] gallbladder                 : 0.7406
+  [11] hepatic_vein                : 0.0000
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_25 (indices: [20, 59, 25])
+Epoch 25 | train_loss=0.1970 | val_loss=0.4968 | mean_dice=0.4410 | mean_iou=0.3555
+Saved checkpoint at epoch 25 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 26 [train]:  62% 259/420 [04:46<02:58,  1.11s/it, loss=0.208]
+Epoch 26 [val]: 100% 25/25 [00:13<00:00,  1.89it/s, val_loss=0.425]
+
+Epoch 26 Validation Summary:
+  Val Loss:  0.5342
+  Mean Dice: 0.4135
+  Mean IoU:  0.3309
+Class-wise Dice scores:
+  [ 0] background                  : 0.9775
+  [ 1] abdominal_wall              : 0.6878
+  [ 2] liver                       : 0.6457
+  [ 3] gastrointestinal_tract      : 0.2911
+  [ 4] fat                         : 0.8262
+  [ 5] grasper                     : 0.4912
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7420
+  [10] gallbladder                 : 0.7141
+  [11] hepatic_vein                : 0.0000
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_26 (indices: [97, 71, 116])
+Epoch 26 | train_loss=0.1910 | val_loss=0.5342 | mean_dice=0.4135 | mean_iou=0.3309
+Saved checkpoint at epoch 26 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 27 [train]:  62% 259/420 [04:46<02:57,  1.10s/it, loss=0.211]
+Epoch 27 [val]: 100% 25/25 [00:14<00:00,  1.78it/s, val_loss=0.388]
+
+Epoch 27 Validation Summary:
+  Val Loss:  0.5043
+  Mean Dice: 0.4294
+  Mean IoU:  0.3427
+Class-wise Dice scores:
+  [ 0] background                  : 0.9792
+  [ 1] abdominal_wall              : 0.6824
+  [ 2] liver                       : 0.7041
+  [ 3] gastrointestinal_tract      : 0.5741
+  [ 4] fat                         : 0.8247
+  [ 5] grasper                     : 0.4528
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.6420
+  [10] gallbladder                 : 0.7226
+  [11] hepatic_vein                : 0.0000
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_27 (indices: [162, 93, 41])
+Epoch 27 | train_loss=0.1899 | val_loss=0.5043 | mean_dice=0.4294 | mean_iou=0.3427
+Saved checkpoint at epoch 27 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 28 [train]:  61% 256/420 [04:43<03:01,  1.11s/it, loss=0.197]
+Epoch 28 [val]: 100% 25/25 [00:13<00:00,  1.84it/s, val_loss=0.395]
+
+Epoch 28 Validation Summary:
+  Val Loss:  0.5086
+  Mean Dice: 0.4385
+  Mean IoU:  0.3533
+Class-wise Dice scores:
+  [ 0] background                  : 0.9761
+  [ 1] abdominal_wall              : 0.7071
+  [ 2] liver                       : 0.7000
+  [ 3] gastrointestinal_tract      : 0.5515
+  [ 4] fat                         : 0.8044
+  [ 5] grasper                     : 0.4621
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7655
+  [10] gallbladder                 : 0.7342
+  [11] hepatic_vein                : 0.0000
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_28 (indices: [94, 90, 53])
+Epoch 28 | train_loss=0.1898 | val_loss=0.5086 | mean_dice=0.4385 | mean_iou=0.3533
+Saved checkpoint at epoch 28 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 29 [train]:  61% 255/420 [04:42<03:02,  1.11s/it, loss=0.137]
+Epoch 29 [val]: 100% 25/25 [00:13<00:00,  1.83it/s, val_loss=0.43]
+
+Epoch 29 Validation Summary:
+  Val Loss:  0.5100
+  Mean Dice: 0.4358
+  Mean IoU:  0.3501
+Class-wise Dice scores:
+  [ 0] background                  : 0.9752
+  [ 1] abdominal_wall              : 0.6958
+  [ 2] liver                       : 0.6722
+  [ 3] gastrointestinal_tract      : 0.5191
+  [ 4] fat                         : 0.8058
+  [ 5] grasper                     : 0.4920
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7330
+  [10] gallbladder                 : 0.7731
+  [11] hepatic_vein                : 0.0000
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_29 (indices: [171, 68, 179])
+Epoch 29 | train_loss=0.1839 | val_loss=0.5100 | mean_dice=0.4358 | mean_iou=0.3501
+Saved checkpoint at epoch 29 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 30 [train]:  61% 258/420 [04:45<02:59,  1.11s/it, loss=0.149]
+Epoch 30 [val]: 100% 25/25 [00:13<00:00,  1.86it/s, val_loss=0.412]
+
+Epoch 30 Validation Summary:
+  Val Loss:  0.5271
+  Mean Dice: 0.4224
+  Mean IoU:  0.3383
+Class-wise Dice scores:
+  [ 0] background                  : 0.9817
+  [ 1] abdominal_wall              : 0.6882
+  [ 2] liver                       : 0.6511
+  [ 3] gastrointestinal_tract      : 0.3970
+  [ 4] fat                         : 0.8075
+  [ 5] grasper                     : 0.4735
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7631
+  [10] gallbladder                 : 0.7297
+  [11] hepatic_vein                : 0.0000
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_30 (indices: [174, 165, 18])
+Epoch 30 | train_loss=0.1834 | val_loss=0.5271 | mean_dice=0.4224 | mean_iou=0.3383
+Saved checkpoint at epoch 30 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 31 [train]:  62% 261/420 [04:49<02:56,  1.11s/it, loss=0.159]
+Epoch 31 [val]: 100% 25/25 [00:13<00:00,  1.90it/s, val_loss=0.341]
+
+Epoch 31 Validation Summary:
+  Val Loss:  0.5151
+  Mean Dice: 0.4674
+  Mean IoU:  0.3797
+Class-wise Dice scores:
+  [ 0] background                  : 0.9814
+  [ 1] abdominal_wall              : 0.7430
+  [ 2] liver                       : 0.6695
+  [ 3] gastrointestinal_tract      : 0.3650
+  [ 4] fat                         : 0.8203
+  [ 5] grasper                     : 0.4811
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7791
+  [10] gallbladder                 : 0.7688
   [11] hepatic_vein                : N/A (absent)
   [12] liver_ligament              : 0.0000
-  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_24
-Epoch 24 | train_loss=0.4260 | val_loss=0.5466 | mean_dice=0.6485 | mean_iou=0.6313
-Saved checkpoint at epoch 24 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_best.pth
-Saved checkpoint at epoch 24 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
-Epoch 25 [train]:   7% 28/420 [00:33<07:48,  1.19s/it, loss=0.429]
-Traceback (most recent call last):
-  File "/content/surgical-image-segmentation/train.py", line 328, in <module>
-    main()
-  File "/content/surgical-image-segmentation/train.py", line 304, in main
-    train_metrics = train_one_epoch(model, train_loader, criterion, optimizer, device, epoch)
-                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/content/surgical-image-segmentation/train.py", line 171, in train_one_epoch
-    loss, loss_components = criterion(logits, masks)
-                            ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1790, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/content/surgical-image-segmentation/losses.py", line 92, in forward
-    "focal_loss": focal_loss.item(),
-                  ^^^^^^^^^^^^^^^^^
-KeyboardInterrupt
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_31 (indices: [155, 162, 43])
+Epoch 31 | train_loss=0.1724 | val_loss=0.5151 | mean_dice=0.4674 | mean_iou=0.3797
+Saved checkpoint at epoch 31 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_best.pth
+Saved checkpoint at epoch 31 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 32 [train]:  59% 248/420 [04:35<03:10,  1.11s/it, loss=0.106]
+Epoch 32 [val]: 100% 25/25 [00:13<00:00,  1.90it/s, val_loss=0.29]
 
+Epoch 32 Validation Summary:
+  Val Loss:  0.5051
+  Mean Dice: 0.4902
+  Mean IoU:  0.3996
+Class-wise Dice scores:
+  [ 0] background                  : 0.9687
+  [ 1] abdominal_wall              : 0.7378
+  [ 2] liver                       : 0.7111
+  [ 3] gastrointestinal_tract      : 0.6284
+  [ 4] fat                         : 0.8061
+  [ 5] grasper                     : 0.4708
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7972
+  [10] gallbladder                 : 0.7622
+  [11] hepatic_vein                : N/A (absent)
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_32 (indices: [136, 186, 62])
+Epoch 32 | train_loss=0.1335 | val_loss=0.5051 | mean_dice=0.4902 | mean_iou=0.3996
+Saved checkpoint at epoch 32 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_best.pth
+Saved checkpoint at epoch 32 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 33 [train]:  60% 253/420 [04:40<03:05,  1.11s/it, loss=0.0847]
+Epoch 33 [val]: 100% 25/25 [00:13<00:00,  1.89it/s, val_loss=0.281]
 
+Epoch 33 Validation Summary:
+  Val Loss:  0.5180
+  Mean Dice: 0.4894
+  Mean IoU:  0.3996
+Class-wise Dice scores:
+  [ 0] background                  : 0.9790
+  [ 1] abdominal_wall              : 0.7383
+  [ 2] liver                       : 0.6971
+  [ 3] gastrointestinal_tract      : 0.5205
+  [ 4] fat                         : 0.8227
+  [ 5] grasper                     : 0.5508
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.8011
+  [10] gallbladder                 : 0.7639
+  [11] hepatic_vein                : N/A (absent)
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_33 (indices: [41, 118, 97])
+Epoch 33 | train_loss=0.1267 | val_loss=0.5180 | mean_dice=0.4894 | mean_iou=0.3996
+Saved checkpoint at epoch 33 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 34 [train]:  61% 257/420 [04:44<03:00,  1.11s/it, loss=0.17]
+Epoch 34 [val]: 100% 25/25 [00:13<00:00,  1.85it/s, val_loss=0.295]
 
+Epoch 34 Validation Summary:
+  Val Loss:  0.5156
+  Mean Dice: 0.4930
+  Mean IoU:  0.4033
+Class-wise Dice scores:
+  [ 0] background                  : 0.9732
+  [ 1] abdominal_wall              : 0.7176
+  [ 2] liver                       : 0.7052
+  [ 3] gastrointestinal_tract      : 0.5523
+  [ 4] fat                         : 0.8318
+  [ 5] grasper                     : 0.5453
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.8003
+  [10] gallbladder                 : 0.7897
+  [11] hepatic_vein                : N/A (absent)
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_34 (indices: [69, 163, 176])
+Epoch 34 | train_loss=0.1267 | val_loss=0.5156 | mean_dice=0.4930 | mean_iou=0.4033
+Saved checkpoint at epoch 34 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_best.pth
+Saved checkpoint at epoch 34 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 35 [train]:  62% 259/420 [04:46<02:58,  1.11s/it, loss=0.124]
+Epoch 35 [val]: 100% 25/25 [00:13<00:00,  1.80it/s, val_loss=0.282]
 
+Epoch 35 Validation Summary:
+  Val Loss:  0.5309
+  Mean Dice: 0.4887
+  Mean IoU:  0.3976
+Class-wise Dice scores:
+  [ 0] background                  : 0.9828
+  [ 1] abdominal_wall              : 0.6899
+  [ 2] liver                       : 0.7130
+  [ 3] gastrointestinal_tract      : 0.6584
+  [ 4] fat                         : 0.7996
+  [ 5] grasper                     : 0.4822
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7743
+  [10] gallbladder                 : 0.7643
+  [11] hepatic_vein                : N/A (absent)
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_35 (indices: [142, 56, 175])
+Epoch 35 | train_loss=0.1247 | val_loss=0.5309 | mean_dice=0.4887 | mean_iou=0.3976
+Saved checkpoint at epoch 35 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 36 [train]:  58% 242/420 [04:27<03:16,  1.10s/it, loss=0.133]
+Epoch 36 [val]: 100% 25/25 [00:13<00:00,  1.85it/s, val_loss=0.27]
 
+Epoch 36 Validation Summary:
+  Val Loss:  0.5192
+  Mean Dice: 0.4931
+  Mean IoU:  0.4026
+Class-wise Dice scores:
+  [ 0] background                  : 0.9827
+  [ 1] abdominal_wall              : 0.7389
+  [ 2] liver                       : 0.7111
+  [ 3] gastrointestinal_tract      : 0.6116
+  [ 4] fat                         : 0.8044
+  [ 5] grasper                     : 0.5232
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7562
+  [10] gallbladder                 : 0.7893
+  [11] hepatic_vein                : N/A (absent)
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_36 (indices: [83, 196, 198])
+Epoch 36 | train_loss=0.1218 | val_loss=0.5192 | mean_dice=0.4931 | mean_iou=0.4026
+Saved checkpoint at epoch 36 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_best.pth
+Saved checkpoint at epoch 36 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 37 [train]:  60% 253/420 [04:40<03:05,  1.11s/it, loss=0.129]
+Epoch 37 [val]: 100% 25/25 [00:13<00:00,  1.90it/s, val_loss=0.298]
 
+Epoch 37 Validation Summary:
+  Val Loss:  0.5376
+  Mean Dice: 0.4820
+  Mean IoU:  0.3930
+Class-wise Dice scores:
+  [ 0] background                  : 0.9787
+  [ 1] abdominal_wall              : 0.7225
+  [ 2] liver                       : 0.7072
+  [ 3] gastrointestinal_tract      : 0.4586
+  [ 4] fat                         : 0.8217
+  [ 5] grasper                     : 0.5236
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7976
+  [10] gallbladder                 : 0.7744
+  [11] hepatic_vein                : N/A (absent)
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_37 (indices: [14, 58, 8])
+Epoch 37 | train_loss=0.1247 | val_loss=0.5376 | mean_dice=0.4820 | mean_iou=0.3930
+Saved checkpoint at epoch 37 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 38 [train]:  62% 260/420 [04:47<02:56,  1.10s/it, loss=0.175]
+Epoch 38 [val]: 100% 25/25 [00:13<00:00,  1.89it/s, val_loss=0.295]
 
+Epoch 38 Validation Summary:
+  Val Loss:  0.5408
+  Mean Dice: 0.4836
+  Mean IoU:  0.3916
+Class-wise Dice scores:
+  [ 0] background                  : 0.9785
+  [ 1] abdominal_wall              : 0.7057
+  [ 2] liver                       : 0.6974
+  [ 3] gastrointestinal_tract      : 0.5574
+  [ 4] fat                         : 0.7929
+  [ 5] grasper                     : 0.5200
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7711
+  [10] gallbladder                 : 0.7797
+  [11] hepatic_vein                : N/A (absent)
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_38 (indices: [80, 102, 68])
+Epoch 38 | train_loss=0.1220 | val_loss=0.5408 | mean_dice=0.4836 | mean_iou=0.3916
+Saved checkpoint at epoch 38 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 39 [train]:  60% 253/420 [04:40<03:04,  1.11s/it, loss=0.122]
+Epoch 39 [val]: 100% 25/25 [00:13<00:00,  1.92it/s, val_loss=0.258]
 
+Epoch 39 Validation Summary:
+  Val Loss:  0.5123
+  Mean Dice: 0.4900
+  Mean IoU:  0.3988
+Class-wise Dice scores:
+  [ 0] background                  : 0.9805
+  [ 1] abdominal_wall              : 0.7126
+  [ 2] liver                       : 0.7110
+  [ 3] gastrointestinal_tract      : 0.6407
+  [ 4] fat                         : 0.7953
+  [ 5] grasper                     : 0.4994
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7874
+  [10] gallbladder                 : 0.7536
+  [11] hepatic_vein                : N/A (absent)
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_39 (indices: [16, 54, 145])
+Epoch 39 | train_loss=0.0968 | val_loss=0.5123 | mean_dice=0.4900 | mean_iou=0.3988
+Saved checkpoint at epoch 39 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 40 [train]:  60% 254/420 [04:40<03:03,  1.11s/it, loss=0.0738]
+Epoch 40 [val]: 100% 25/25 [00:13<00:00,  1.88it/s, val_loss=0.249]
 
+Epoch 40 Validation Summary:
+  Val Loss:  0.5085
+  Mean Dice: 0.4870
+  Mean IoU:  0.3957
+Class-wise Dice scores:
+  [ 0] background                  : 0.9773
+  [ 1] abdominal_wall              : 0.7448
+  [ 2] liver                       : 0.7176
+  [ 3] gastrointestinal_tract      : 0.5755
+  [ 4] fat                         : 0.8116
+  [ 5] grasper                     : 0.5072
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7396
+  [10] gallbladder                 : 0.7701
+  [11] hepatic_vein                : N/A (absent)
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_40 (indices: [183, 80, 54])
+Epoch 40 | train_loss=0.0931 | val_loss=0.5085 | mean_dice=0.4870 | mean_iou=0.3957
+Saved checkpoint at epoch 40 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 41 [train]:  59% 246/420 [04:31<03:12,  1.10s/it, loss=0.0753]
+Epoch 41 [val]: 100% 25/25 [00:13<00:00,  1.89it/s, val_loss=0.241]
 
+Epoch 41 Validation Summary:
+  Val Loss:  0.5056
+  Mean Dice: 0.4989
+  Mean IoU:  0.4096
+Class-wise Dice scores:
+  [ 0] background                  : 0.9820
+  [ 1] abdominal_wall              : 0.7568
+  [ 2] liver                       : 0.7263
+  [ 3] gastrointestinal_tract      : 0.6179
+  [ 4] fat                         : 0.8070
+  [ 5] grasper                     : 0.5336
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7854
+  [10] gallbladder                 : 0.7785
+  [11] hepatic_vein                : N/A (absent)
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_41 (indices: [167, 127, 101])
+Epoch 41 | train_loss=0.0918 | val_loss=0.5056 | mean_dice=0.4989 | mean_iou=0.4096
+Saved checkpoint at epoch 41 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_best.pth
+Saved checkpoint at epoch 41 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 42 [train]:  63% 265/420 [04:53<02:51,  1.11s/it, loss=0.121]
+Epoch 42 [val]: 100% 25/25 [00:13<00:00,  1.87it/s, val_loss=0.254]
 
+Epoch 42 Validation Summary:
+  Val Loss:  0.5203
+  Mean Dice: 0.4936
+  Mean IoU:  0.4025
+Class-wise Dice scores:
+  [ 0] background                  : 0.9821
+  [ 1] abdominal_wall              : 0.7160
+  [ 2] liver                       : 0.7069
+  [ 3] gastrointestinal_tract      : 0.6217
+  [ 4] fat                         : 0.8071
+  [ 5] grasper                     : 0.5450
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7774
+  [10] gallbladder                 : 0.7674
+  [11] hepatic_vein                : N/A (absent)
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_42 (indices: [164, 117, 36])
+Epoch 42 | train_loss=0.0931 | val_loss=0.5203 | mean_dice=0.4936 | mean_iou=0.4025
+Saved checkpoint at epoch 42 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 43 [train]:  61% 255/420 [04:41<03:02,  1.11s/it, loss=0.114]
+Epoch 43 [val]: 100% 25/25 [00:13<00:00,  1.88it/s, val_loss=0.243]
 
+Epoch 43 Validation Summary:
+  Val Loss:  0.5256
+  Mean Dice: 0.4953
+  Mean IoU:  0.4045
+Class-wise Dice scores:
+  [ 0] background                  : 0.9811
+  [ 1] abdominal_wall              : 0.7426
+  [ 2] liver                       : 0.7175
+  [ 3] gastrointestinal_tract      : 0.6199
+  [ 4] fat                         : 0.8068
+  [ 5] grasper                     : 0.5425
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7669
+  [10] gallbladder                 : 0.7664
+  [11] hepatic_vein                : N/A (absent)
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_43 (indices: [67, 35, 63])
+Epoch 43 | train_loss=0.0892 | val_loss=0.5256 | mean_dice=0.4953 | mean_iou=0.4045
+Saved checkpoint at epoch 43 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 44 [train]:  60% 251/420 [04:37<03:06,  1.10s/it, loss=0.0885]
+Epoch 44 [val]: 100% 25/25 [00:13<00:00,  1.86it/s, val_loss=0.25]
 
+Epoch 44 Validation Summary:
+  Val Loss:  0.5273
+  Mean Dice: 0.4927
+  Mean IoU:  0.4018
+Class-wise Dice scores:
+  [ 0] background                  : 0.9807
+  [ 1] abdominal_wall              : 0.7330
+  [ 2] liver                       : 0.7116
+  [ 3] gastrointestinal_tract      : 0.6045
+  [ 4] fat                         : 0.8052
+  [ 5] grasper                     : 0.5330
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7847
+  [10] gallbladder                 : 0.7596
+  [11] hepatic_vein                : N/A (absent)
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_44 (indices: [190, 143, 137])
+Epoch 44 | train_loss=0.0876 | val_loss=0.5273 | mean_dice=0.4927 | mean_iou=0.4018
+Saved checkpoint at epoch 44 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 45 [train]:  62% 260/420 [04:46<02:56,  1.10s/it, loss=0.101]
+Epoch 45 [val]: 100% 25/25 [00:13<00:00,  1.82it/s, val_loss=0.246]
 
+Epoch 45 Validation Summary:
+  Val Loss:  0.5317
+  Mean Dice: 0.4892
+  Mean IoU:  0.3988
+Class-wise Dice scores:
+  [ 0] background                  : 0.9817
+  [ 1] abdominal_wall              : 0.7435
+  [ 2] liver                       : 0.7050
+  [ 3] gastrointestinal_tract      : 0.5388
+  [ 4] fat                         : 0.8102
+  [ 5] grasper                     : 0.5463
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7831
+  [10] gallbladder                 : 0.7625
+  [11] hepatic_vein                : N/A (absent)
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_45 (indices: [67, 191, 149])
+Epoch 45 | train_loss=0.0885 | val_loss=0.5317 | mean_dice=0.4892 | mean_iou=0.3988
+Saved checkpoint at epoch 45 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 46 [train]:  59% 246/420 [04:32<03:12,  1.11s/it, loss=0.0798]
+Epoch 46 [val]: 100% 25/25 [00:13<00:00,  1.86it/s, val_loss=0.248]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Epoch 46 Validation Summary:
+  Val Loss:  0.5311
+  Mean Dice: 0.4894
+  Mean IoU:  0.3979
+Class-wise Dice scores:
+  [ 0] background                  : 0.9818
+  [ 1] abdominal_wall              : 0.7341
+  [ 2] liver                       : 0.7064
+  [ 3] gastrointestinal_tract      : 0.5766
+  [ 4] fat                         : 0.8052
+  [ 5] grasper                     : 0.5431
+  [ 6] connective_tissue           : 0.0000
+  [ 7] blood                       : 0.0000
+  [ 8] cystic_duct                 : 0.0000
+  [ 9] l_hook_electrocautery       : 0.7704
+  [10] gallbladder                 : 0.7554
+  [11] hepatic_vein                : N/A (absent)
+  [12] liver_ligament              : 0.0000
+  Saved visualizations to: /content/drive/MyDrive/surgical-image-segmentation/visualizations/epoch_46 (indices: [109, 149, 102])
+Epoch 46 | train_loss=0.0862 | val_loss=0.5311 | mean_dice=0.4894 | mean_iou=0.3979
+Saved checkpoint at epoch 46 -> /content/drive/MyDrive/surgical-image-segmentation/checkpoints/checkpoint_latest.pth
+Epoch 47 [train]:  37% 156/420 [02:52<04:51,  1.11s/it, loss=0.115]

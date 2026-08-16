@@ -114,72 +114,78 @@ class CholecSegDataset(Dataset):
     """
     Args:
         root_dir: path to the 'archive' directory containing videoXX folders.
-        video_list: list of video folder names to include (e.g. TRAIN_VIDEOS).
+        clip_list: list of "videoXX/clipYY" strings identifying EXACTLY
+            which clips to include (e.g. splits.TRAIN_CLIPS). This replaces
+            the old video_list-based indexing — splitting by whole video
+            starved several rare classes entirely from train or val (some
+            classes only exist in 1-2 of the 17 source videos). Splitting
+            by clip instead lets a stratified split guarantee every class
+            has representation in both train and val wherever the raw
+            footage has enough distinct clips containing it.
         frame_step: sub-sampling step size (2 for train, 4 for val/test).
         transforms: an Albumentations Compose pipeline.
     """
 
-    def __init__(self, root_dir: str, video_list: list, frame_step: int,
+    def __init__(self, root_dir: str, clip_list: list, frame_step: int,
                  transforms: A.Compose = None):
         self.root_dir = root_dir
-        self.video_list = video_list
+        self.clip_list = clip_list
         self.frame_step = frame_step
         self.transforms = transforms
 
         # samples: list of dicts {image_path, mask_path, video_name, frame_id}
         self.samples = []
-        # video_to_indices: for the balanced sampler
+        # video_to_indices: kept for VideoBalancedBatchSampler compatibility
+        # (it round-robins by video_name to reduce intra-batch correlation;
+        # that still works fine even though clips within a video may now be
+        # split across train/val/test, since each dataset instance only
+        # contains ITS OWN split's clips).
         self.video_to_indices = defaultdict(list)
 
         self._index_dataset()
 
     def _index_dataset(self):
-        for video_name in self.video_list:
-            video_path = os.path.join(self.root_dir, video_name)
-            if not os.path.isdir(video_path):
-                print(f"[CholecSegDataset] WARNING: missing video dir {video_path}")
+        for clip_key in self.clip_list:
+            video_name, clip_dir = clip_key.split("/", 1)
+            clip_path = os.path.join(self.root_dir, video_name, clip_dir)
+            if not os.path.isdir(clip_path):
+                print(f"[CholecSegDataset] WARNING: missing clip dir {clip_path}")
                 continue
 
-            clip_dirs = sorted(
-                d for d in os.listdir(video_path)
-                if os.path.isdir(os.path.join(video_path, d))
+            frame_files = sorted(
+                f for f in os.listdir(clip_path) if f.endswith(config.IMAGE_SUFFIX)
             )
 
-            for clip_dir in clip_dirs:
-                clip_path = os.path.join(video_path, clip_dir)
-                frame_files = sorted(
-                    f for f in os.listdir(clip_path) if f.endswith(config.IMAGE_SUFFIX)
+            # Apply temporal sub-sampling within this clip
+            for idx, fname in enumerate(frame_files):
+                if idx % self.frame_step != 0:
+                    continue
+
+                frame_prefix = fname[: -len(config.IMAGE_SUFFIX)]  # "frame_{N}"
+                image_path = os.path.join(clip_path, fname)
+                mask_path = os.path.join(
+                    clip_path, frame_prefix + config.WATERSHED_MASK_SUFFIX
                 )
 
-                # Apply temporal sub-sampling within this clip
-                for idx, fname in enumerate(frame_files):
-                    if idx % self.frame_step != 0:
-                        continue
+                if not os.path.isfile(mask_path):
+                    continue  # skip frames without ground-truth mask
 
-                    frame_prefix = fname[: -len(config.IMAGE_SUFFIX)]  # "frame_{N}"
-                    image_path = os.path.join(clip_path, fname)
-                    mask_path = os.path.join(
-                        clip_path, frame_prefix + config.WATERSHED_MASK_SUFFIX
-                    )
-
-                    if not os.path.isfile(mask_path):
-                        continue  # skip frames without ground-truth mask
-
-                    sample_idx = len(self.samples)
-                    self.samples.append(
-                        {
-                            "image_path": image_path,
-                            "mask_path": mask_path,
-                            "video_name": video_name,
-                            "frame_id": frame_prefix,
-                        }
-                    )
-                    self.video_to_indices[video_name].append(sample_idx)
+                sample_idx = len(self.samples)
+                self.samples.append(
+                    {
+                        "image_path": image_path,
+                        "mask_path": mask_path,
+                        "video_name": video_name,
+                        "clip_name": clip_dir,
+                        "frame_id": frame_prefix,
+                    }
+                )
+                self.video_to_indices[video_name].append(sample_idx)
 
         if len(self.samples) == 0:
             raise RuntimeError(
-                f"No samples indexed from {self.root_dir} for videos {self.video_list}. "
-                "Check that the directory structure and file suffixes match config.py."
+                f"No samples indexed from {self.root_dir} for clips {self.clip_list}. "
+                "Check that splits.py / config.py paths match the directory structure."
             )
 
     def __len__(self):
