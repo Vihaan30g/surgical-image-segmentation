@@ -206,3 +206,19 @@ LEAKY_RELU_SLOPE = 0.1
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 SEED = 42
 NUM_VIS_SAMPLES = 3  # fixed validation samples saved every epoch
+
+CLASS_WEIGHTS = [
+    0.0025,  # [0] background
+    0.0031,  # [1] abdominal_wall
+    0.0035,  # [2] liver
+    0.0367,  # [3] gastrointestinal_tract
+    0.0044,  # [4] fat
+    0.0315,  # [5] grasper
+    0.0357,  # [6] connective_tissue
+    0.2059,  # [7] blood
+    1.8764,  # [8] cystic_duct
+    0.0705,  # [9] l_hook_electrocautery
+    0.0111,  # [10] gallbladder
+    10.3185,  # [11] hepatic_vein
+    0.4001,  # [12] liver_ligament
+]
