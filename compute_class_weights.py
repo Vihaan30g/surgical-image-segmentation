@@ -14,15 +14,16 @@ import torch
 from tqdm import tqdm
 
 import config
+import splits
 from dataset import CholecSegDataset, remap_watershed_mask
 import cv2
 import os
 
 
-def count_pixels(video_list):
+def count_pixels(clip_list):
     counts = np.zeros(config.NUM_CLASSES, dtype=np.int64)
     dataset = CholecSegDataset(
-        root_dir=config.DATA_ROOT, video_list=video_list,
+        root_dir=config.DATA_ROOT, clip_list=clip_list,
         frame_step=config.TRAIN_FRAME_STEP, transforms=None,
     )
     print(f"Scanning {len(dataset)} training samples for class pixel counts...")
@@ -37,7 +38,7 @@ def count_pixels(video_list):
     return counts
 
 
-pixel_counts = count_pixels(config.TRAIN_VIDEOS)
+pixel_counts = count_pixels(splits.TRAIN_CLIPS)
 
 print("\nRaw pixel counts per class:")
 for cid in range(config.NUM_CLASSES):
