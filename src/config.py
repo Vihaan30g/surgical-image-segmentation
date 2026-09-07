@@ -40,7 +40,13 @@ def _detect_data_root():
     directly at <repo_root>), presumably depending on how the Kaggle zip
     was extracted. Rather than hardcode one and have it silently break
     next session, auto-detect by checking where a known video folder
-    (video01) actually is, and fall back with a clear error otherwise.
+    (video01) actually is.
+
+    Returns None (instead of raising) when no dataset is found, so that
+    importing this file still works for inference-only usage where no
+    dataset has been downloaded at all -- only training / split-generation
+    code actually needs DATA_ROOT, and those entry points check for None
+    themselves and fail with a clear message at that point instead.
     """
     candidates = [
         _REPO_ROOT,                                  # videoXX directly in repo root
@@ -51,14 +57,7 @@ def _detect_data_root():
     for candidate in candidates:
         if os.path.isdir(os.path.join(candidate, "video01")):
             return candidate
-    # Nothing matched — don't silently pick a wrong path; surface this
-    # clearly instead of failing later with 17 confusing "MISSING" warnings.
-    raise RuntimeError(
-        "Could not auto-detect DATA_ROOT: no candidate path contains a "
-        "'video01' folder. Checked: " + ", ".join(candidates) + ". "
-        "Run `!find /content -maxdepth 4 -iname 'video01'` in Colab to "
-        "locate the dataset, then set DATA_ROOT manually in config.py."
-    )
+    return None
 
 
 DATA_ROOT = _detect_data_root()
@@ -69,6 +68,16 @@ CHECKPOINT_DIR = os.path.join(DRIVE_ROOT, "checkpoints")
 CHECKPOINT_LATEST = os.path.join(CHECKPOINT_DIR, "checkpoint_latest.pth")
 CHECKPOINT_BEST = os.path.join(CHECKPOINT_DIR, "checkpoint_best.pth")
 VIS_DIR = os.path.join(DRIVE_ROOT, "visualizations")
+
+# --------------------------------------------------------------------------
+# Local inference paths (used by src/inference.py, unrelated to training
+# above). These live at the repo root, one level up from src/, so cloning
+# the repo + dropping weights/images into place works without editing code.
+# --------------------------------------------------------------------------
+_PROJECT_ROOT = os.path.dirname(_REPO_ROOT)
+WEIGHTS_PATH = os.path.join(_PROJECT_ROOT, "weights", "best_model.pth")
+INFERENCE_INPUT_DIR = os.path.join(_PROJECT_ROOT, "inference_input")
+INFERENCE_OUTPUT_DIR = os.path.join(_PROJECT_ROOT, "inference_output")
 
 # --------------------------------------------------------------------------
 # 2. DATASET SPLITS
