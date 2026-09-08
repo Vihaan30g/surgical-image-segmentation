@@ -184,9 +184,9 @@ pip install -r requirements.txt
 ```
 
 ### 3. Download the trained weights
-Download `best_model.pth` from this Google Drive link:
+Download `checkpoint_best.pth` from this Google Drive link:
 
-**[Download model weights](#)** *(replace this with your public Google Drive share link)*
+**[Download model weights](https://drive.google.com/file/d/130ePIeZ6A0F6N0XUNNUB8poQS7DbMN7B/view?usp=sharing)**
 
 Place the downloaded file inside the `weights/` folder at the root of the cloned repo, so it looks like this:
 ```
