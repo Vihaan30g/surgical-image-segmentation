@@ -173,7 +173,7 @@ No GPU or training setup required for this part — just Python and the four ste
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/<your-username>/surgical-image-segmentation.git
+git clone https://github.com/Vihaan30g/surgical-image-segmentation.git
 cd surgical-image-segmentation
 ```
 
@@ -184,7 +184,7 @@ pip install -r requirements.txt
 ```
 
 ### 3. Download the trained weights
-Download `checkpoint_best.pth` from this Google Drive link:
+Download the model from this Google Drive link:
 
 **[Download model weights](https://drive.google.com/file/d/130ePIeZ6A0F6N0XUNNUB8poQS7DbMN7B/view?usp=sharing)**
 

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Surgical Image Segmentation: U-Net on CholecSeg8k | Vihaan Gupta</title>
+<meta name="description" content="A from-scratch PyTorch U-Net that segments laparoscopic surgery frames into 13 anatomy and instrument classes, with a clip-level data split and a focal + Dice loss to handle severe class imbalance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--soft:#f6f8fa;--text:#1f2933;--muted:#5b6770;--line:#e1e5ea;--accent:#1d4ed8;--code:#0f172a;--codetext:#e2e8f0}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.7;font-size:17px}
+header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line)}
+.bar{max-width:900px;margin:auto;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.bar a{color:var(--text);text-decoration:none;font-weight:600;font-size:15px}
+.bar a:hover{color:var(--accent)}
+main{max-width:900px;margin:auto;padding:32px 20px 60px}
+h1{font-size:2.1rem;line-height:1.25;margin:.2em 0}
+h2{font-size:1.5rem;margin:2.4em 0 .6em;padding-bottom:.3em;border-bottom:1px solid var(--line)}
+h3{font-size:1.15rem;margin:1.5em 0 .4em}
+p{margin:.6em 0}
+p.lead{color:var(--muted);font-size:1.1rem}
+.meta{color:var(--muted);font-size:14px}
+a{color:var(--accent)}
+code{font-family:"JetBrains Mono",Consolas,monospace;font-size:.88em;background:var(--soft);border:1px solid var(--line);padding:1px 5px;border-radius:4px}
+.cb{position:relative;margin:14px 0}
+pre{margin:0;background:var(--code);color:var(--codetext);padding:16px 18px;border-radius:8px;overflow-x:auto;font-family:"JetBrains Mono",Consolas,monospace;font-size:14px;line-height:1.55}
+pre.tree{background:var(--soft);color:var(--text);border:1px solid var(--line);font-size:13px}
+.cb button{position:absolute;top:8px;right:8px;background:#334155;color:#e2e8f0;border:0;border-radius:5px;padding:4px 10px;font-size:12px;cursor:pointer}
+.cb button:hover{background:#475569}
+.note,.warn{padding:12px 16px;border-radius:6px;margin:16px 0;border-left:4px solid var(--accent);background:#eff4ff}
+.warn{border-color:#b45309;background:#fff7ed}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:14px 0;display:block;overflow-x:auto}
+th,td{border:1px solid var(--line);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--soft)}
+td.n,th.n{text-align:right;white-space:nowrap}
+nav.toc{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:14px 22px;margin:22px 0}
+nav.toc ol{margin:6px 0 0;padding-left:20px;columns:2;column-gap:32px}
+@media(max-width:640px){nav.toc ol{columns:1}}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+.btn{display:inline-block;padding:8px 16px;border-radius:6px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--accent);background:var(--accent);color:#fff}
+.btn:hover{background:#1e40af}
+.btn.alt{background:#fff;color:var(--accent)}
+.btn.alt:hover{background:#eff4ff}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}
+.stat{border:1px solid var(--line);border-radius:8px;padding:12px 10px;text-align:center;background:var(--soft)}
+.stat b{display:block;font-size:1.45rem;line-height:1.2;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted);line-height:1.3;display:block;margin-top:2px}
+@media(max-width:640px){.stats{grid-template-columns:1fr 1fr}}
+.cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0}
+@media(max-width:760px){.cols{grid-template-columns:1fr}}
+.col{border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:15px;line-height:1.5}
+.col b{display:block;font-size:13px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px}
+.col.hi{border-left:4px solid #15803d}.col.hi b{color:#15803d}
+.col.mid{border-left:4px solid var(--accent)}.col.mid b{color:var(--accent)}
+.col.lo{border-left:4px solid #b45309}.col.lo b{color:#b45309}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
+@media(max-width:700px){.compare{grid-template-columns:1fr}}
+.compare div{border:1px solid var(--line);border-radius:8px;padding:12px 16px}
+.compare h4{margin:0 0 4px;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}
+.compare .bad h4{color:#b45309}.compare .good h4{color:#15803d}
+.compare p{margin:.3em 0;font-size:15px}
+ol.steps{padding-left:20px}ol.steps li{margin:6px 0}
+.split{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:26px;align-items:start}
+@media(max-width:800px){.split{grid-template-columns:1fr}}
+.fig{margin:14px 0;border:1px solid var(--line);border-radius:8px;background:#fff;padding:10px;text-align:center}
+.fig img{display:block;max-width:100%;height:auto;margin:auto;cursor:zoom-in}
+.fig figcaption{font-size:13.5px;color:var(--muted);margin-top:6px;line-height:1.4}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+@media(max-width:700px){.pair{grid-template-columns:1fr}}
+.fig.wide{max-width:640px;margin-left:auto;margin-right:auto}
+ul.tight{margin:.4em 0;padding-left:20px}ul.tight li{margin:4px 0}
+#lb{position:fixed;inset:0;background:rgba(15,23,42,.88);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;cursor:zoom-out}
+#lb img{max-width:100%;max-height:100%;background:#fff;border-radius:6px}
+footer{border-top:1px solid var(--line);padding:24px 20px;text-align:center;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <a href="https://vihaan30g.github.io/">&larr; All Projects</a>
+  <a href="https://github.com/Vihaan30g">GitHub</a>
+</div></header>
+
+<main>
+<p class="meta">Deep Learning &middot; Computer Vision &middot; Semantic Segmentation &middot; Medical Imaging &middot; PyTorch &middot; Last updated: October 2026</p>
+<h1>Surgical Image Segmentation: U-Net on CholecSeg8k</h1>
+<p class="lead">A U-Net built from scratch in PyTorch that labels every pixel of a laparoscopic gallbladder-surgery frame as one of 13 anatomy and instrument classes.</p>
+
+<div class="btns">
+  <a class="btn" href="https://github.com/Vihaan30g/surgical-image-segmentation">View repository on GitHub</a>
+  <a class="btn alt" href="#results">See the results</a>
+</div>
+
+<div class="stats">
+  <div class="stat"><b>13</b><span>pixel-level classes</span></div>
+  <div class="stat"><b>8,080</b><span>frames, 101 video clips</span></div>
+  <div class="stat"><b>0.568</b><span>best mean Dice (validation)</span></div>
+  <div class="stat"><b>0.430</b><span>best mean IoU (validation)</span></div>
+</div>
+
+<nav class="toc"><strong>Contents</strong>
+<ol>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#dataset">Dataset</a></li>
+<li><a href="#split">How the data was split</a></li>
+<li><a href="#architecture">Model architecture</a></li>
+<li><a href="#training">Training setup</a></li>
+<li><a href="#results">Results and analysis</a></li>
+<li><a href="#limits">Honest limitations</a></li>
+<li><a href="#run">Running inference</a></li>
+<li><a href="#structure">Repository structure</a></li>
+<li><a href="#next">Next steps</a></li>
+</ol></nav>
+
+<h2 id="overview">1. Overview</h2>
+<p><strong>Task.</strong> 13-class semantic segmentation of laparoscopic cholecystectomy (gallbladder removal) frames. Each pixel is classified as background, an organ or tissue type, blood, or one of two surgical instruments.</p>
+<p><strong>Approach.</strong> A 4-level U-Net with no pretrained encoder, trained with a combined Focal and Dice loss to fight severe class imbalance, on a custom clip-level train, validation and test split.</p>
+<p><strong>Why I built it.</strong> I wanted to see for myself how a decoder rebuilds an image from a heavily compressed representation, so I built one instead of only reading about it. It is not a state-of-the-art result, and the limitations section says exactly why. The process is the point.</p>
+<p><strong>Stack.</strong> PyTorch, Albumentations and OpenCV, trained on a free-tier Google Colab GPU, with checkpoints saved to Google Drive so an 80-epoch run could be spread across several sessions.</p>
+<p><strong>Status.</strong> Trained for 80 scheduled epochs. Large, common structures (background, fat, liver) segment well. Several rare classes plateau at a mediocre score, and one, <code>cystic_duct</code>, never learned at all. I stopped there on purpose rather than keep tuning around a dataset limit I had already diagnosed.</p>
+
+<h2 id="dataset">2. Dataset</h2>
+<p><a href="https://www.kaggle.com/datasets/newslab/cholecseg8k">CholecSeg8k</a> provides segmentation labels on top of <a href="https://camma.unistra.fr/datasets/">Cholec80</a>, a set of 80 laparoscopic cholecystectomy videos recorded at 25 fps and released by CAMMA (University of Strasbourg, IHU Strasbourg and IRCAD).</p>
+<ul class="tight">
+<li><strong>8,080 frames</strong> in <strong>101 short clips</strong> of 80 consecutive frames each, taken from a subset of the Cholec80 videos, at 854 &times; 480 resolution.</li>
+<li>Each frame has three label images: a hand-annotated colour mask (for viewing only), a tool mask, and a <strong>watershed mask</strong>, which is the training target.</li>
+<li><strong>13 classes:</strong> background, abdominal wall, liver, gastrointestinal tract, fat, grasper, connective tissue, blood, cystic duct, L-hook electrocautery, gallbladder, hepatic vein and liver ligament. Several are rare and do not appear in every frame.</li>
+</ul>
+
+<h3>Why the watershed mask</h3>
+<p>The colour mask lets a person recognise the anatomy, but a loss function cannot use it directly. The watershed mask stores one integer class ID per pixel, so it is passed through a 256-entry lookup table into a clean <code>(H, W)</code> array of class indices 0 to 12. Cross-entropy-style losses need exactly this kind of per-pixel integer label.</p>
+
+<h3>Working out the class mapping</h3>
+<p>The raw integer values in the watershed masks are not clearly documented against the 13 class names. Matching them took real trial and error: cross-referencing the colour masks and, in a few cases, confirming a value by eye against the anatomy frame by frame. The final mapping is graded by how confident I am in it:</p>
+<div class="cols">
+<div class="col hi"><b>High confidence</b>Cross-referenced with the colour mask: background, abdominal wall, liver, fat, GI tract, grasper, blood.</div>
+<div class="col mid"><b>Corrected by visual check</b>After an earlier attempt got them wrong: gallbladder, liver ligament, connective tissue, hepatic vein.</div>
+<div class="col lo"><b>Inferred, not confirmed</b>Based on likely pixel area: cystic duct and L-hook electrocautery. Worth double-checking before trusting the model on them.</div>
+</div>
+
+<h2 id="split">3. How the data was split</h2>
+<p>This was the hardest part of the project, harder than the architecture itself.</p>
+<div class="compare">
+<div class="bad"><h4>First attempt: split by whole video</h4>
+<p>Several classes appear in only one or two of the 17 source videos, so some vanished from a split by bad luck. The result was <strong>zero training frames for <code>liver_ligament</code></strong> and <strong>zero validation frames for <code>connective_tissue</code>, <code>blood</code> and <code>hepatic_vein</code></strong>. Those classes could not be learned or evaluated, whatever the model did.</p></div>
+<div class="good"><h4>The fix: split by clip, with class guarantees</h4>
+<p>Each video is made of several 80-frame clips, a finer unit that can be used to balance rare classes across splits. All frames of a clip always stay in the same split.</p></div>
+</div>
+<ol class="steps">
+<li>Scan every frame of every clip and record which of the 13 classes appear in it. All frames are read, not a sample, because sampling could miss a rare class.</li>
+<li>Rank classes from rarest to most common. For each one, reserve at least one clip for <strong>train</strong>, and a second distinct clip for <strong>validation</strong> when one exists.</li>
+<li>Shuffle the remaining clips and distribute them to reach roughly a 70 / 15 / 15 frame split across train, validation and test.</li>
+<li>Keep each clip whole. Consecutive frames at 25 fps are near-duplicates, so splitting a clip would leak information and inflate validation scores.</li>
+</ol>
+<p>This gives every class with real presence in the data some training coverage, and validation coverage wherever enough distinct clips exist. It cannot create frames that are not in the footage, but it stops the split from making the imbalance worse.</p>
+<h3>Handling imbalance in the loss and the pipeline</h3>
+<ul class="tight">
+<li><strong>Class weights.</strong> Per-class pixel-frequency weights, computed from the training split only, feed both the Dice and Focal terms. A rare class such as <code>hepatic_vein</code> is weighted roughly 10&times;.</li>
+<li><strong>Temporal sub-sampling.</strong> Every 2nd frame for training and every 4th for validation and test, to cut near-duplicates.</li>
+<li><strong>Preprocessing and augmentation.</strong> Frames are resized to 512 &times; 288. Training adds flips, affine shift, scale and rotation, and photometric jitter.</li>
+<li><strong>Custom batch sampler.</strong> Each training batch draws from several different source videos, not a run of correlated consecutive frames.</li>
+</ul>
+
+<h2 id="architecture">4. Model architecture</h2>
+<p>A standard 4-level <strong>U-Net</strong>, written from scratch in PyTorch with no pretrained backbone. Input is an <code>(N, 3, 288, 512)</code> RGB image and output is <code>(N, 13, 288, 512)</code> raw per-pixel logits, with softmax applied afterwards.</p>
+<div class="split">
+<div>
+<p><strong>Building block (<code>ConvBlock</code>).</strong> Two repetitions of 3&times;3 Conv (no bias), GroupNorm with 8 groups, then LeakyReLU(0.1). GroupNorm replaces BatchNorm because it stays stable at the small batch sizes a free Colab GPU allows. LeakyReLU avoids dead neurons that plain ReLU can cause with GroupNorm.</p>
+<p><strong>Bottleneck.</strong> One <code>ConvBlock</code>, 512 &rarr; <strong>1024</strong> channels at 18 &times; 32, the deepest and most compressed point.</p>
+<p><strong>Output head.</strong> A 1&times;1 convolution, 64 &rarr; 13 channels, producing class logits at full input resolution.</p>
+<p>The encoder compresses 288 &times; 512 down to 18 &times; 32, a 16&times; spatial reduction, while growing to 1024 channels. The decoder mirrors it back up, and skip connections at every scale recover fine detail that pooling would otherwise lose. If a transposed-conv output does not match its skip connection in size, which can happen with odd inputs, it is bilinearly resized first instead of crashing or misaligning features.</p>
+</div>
+<figure class="fig"><img src="assets/images/unet_architecture.png" width="660" height="660" loading="lazy" alt="U-Net architecture flowchart"><figcaption>U-Net: four encoder stages, a bottleneck, four decoder stages, with skip connections at every resolution.</figcaption></figure>
+</div>
+<div class="pair">
+<div>
+<h3>Encoder</h3>
+<table>
+<tr><th>Stage</th><th>Channels</th><th>Size after pooling</th></tr>
+<tr><td>Down 1</td><td>3 &rarr; 64</td><td>144 &times; 256</td></tr>
+<tr><td>Down 2</td><td>64 &rarr; 128</td><td>72 &times; 128</td></tr>
+<tr><td>Down 3</td><td>128 &rarr; 256</td><td>36 &times; 64</td></tr>
+<tr><td>Down 4</td><td>256 &rarr; 512</td><td>18 &times; 32</td></tr>
+</table>
+</div>
+<div>
+<h3>Decoder</h3>
+<table>
+<tr><th>Stage</th><th>Upsample in</th><th>+ Skip</th><th>Out</th></tr>
+<tr><td>Up 4</td><td>1024</td><td>512</td><td>512</td></tr>
+<tr><td>Up 3</td><td>512</td><td>256</td><td>256</td></tr>
+<tr><td>Up 2</td><td>256</td><td>128</td><td>128</td></tr>
+<tr><td>Up 1</td><td>128</td><td>64</td><td>64</td></tr>
+</table>
+</div>
+</div>
+<p>Each decoder stage upsamples with a 2&times;2 transposed convolution (stride 2), concatenates the matching encoder skip, then fuses them with a <code>ConvBlock</code>.</p>
+
+<h2 id="training">5. Training setup</h2>
+<table>
+<tr><th>Setting</th><th>Value</th></tr>
+<tr><td>Learning rate</td><td>1e-3, cosine annealed over the full run</td></tr>
+<tr><td>Weight decay</td><td>1e-4</td></tr>
+<tr><td>Batch size</td><td>8</td></tr>
+<tr><td>Scheduled epochs</td><td>80</td></tr>
+<tr><td>Loss</td><td>0.5 &times; Focal (&gamma; = 2.0) + 0.5 &times; Dice, both per-class weighted</td></tr>
+<tr><td>Input size</td><td>512 &times; 288</td></tr>
+<tr><td>Hardware</td><td>Google Colab, free-tier GPU</td></tr>
+</table>
+
+<h2 id="results">6. Results and analysis</h2>
+<p>Validation metrics were logged for <strong>56 of the 80 epochs</strong>. A few ranges are missing because a Colab session disconnected before that part of the log reached Drive. Training itself carried on through those gaps thanks to checkpoint and resume. Every number and chart here uses real logged values only, with nothing interpolated.</p>
+
+<div class="stats">
+  <div class="stat"><b>0.294</b><span>mean Dice, epoch 0 (random init)</span></div>
+  <div class="stat"><b>0.568</b><span>mean Dice, best (epoch 62)</span></div>
+  <div class="stat"><b>0.563</b><span>mean Dice, final (epoch 79)</span></div>
+  <div class="stat"><b>0.425</b><span>mean IoU, final (epoch 79)</span></div>
+</div>
+<p>Mean IoU rose from 0.211 at initialisation to 0.430 at the best epoch.</p>
+
+<div class="pair">
+<figure class="fig"><img src="assets/images/loss_curve.png" width="650" height="650" loading="lazy" alt="Training and validation loss curve"><figcaption>Training and validation loss</figcaption></figure>
+<figure class="fig"><img src="assets/images/dice_iou_curve.png" width="650" height="650" loading="lazy" alt="Validation mean Dice and IoU curve"><figcaption>Validation mean Dice and IoU</figcaption></figure>
+</div>
+<p><strong>Loss.</strong> Training loss fell steadily from about 0.50 to about 0.42&ndash;0.43. Validation loss dropped alongside it early on, then flattened around 0.489&ndash;0.490 for the last logged epochs. That plateau is real, not a logging artefact, and suggests the run had reached about what this architecture, dataset and loss could give.</p>
+<p><strong>Dice and IoU.</strong> Most of the improvement came in two visible jumps: one right after the first big gap, once the earlier split and loss-weighting fixes were fully in effect, and a gentler climb through the 50s and 60s before flattening.</p>
+
+<h3>Per-class Dice</h3>
+<figure class="fig wide"><img src="assets/images/per_class_dice.png" width="650" height="650" loading="lazy" alt="Per-class Dice score at initialisation, best epoch and final epoch"><figcaption>Per-class Dice at initialisation, at the best epoch (62) and at the final epoch (79).</figcaption></figure>
+<p>The model does well on large, distinct, common structures: background, fat and liver. It also does surprisingly well on <code>hepatic_vein</code> and <code>connective_tissue</code> given how rare they are, which suggests the per-class loss weighting is doing real work. <code>cystic_duct</code> is the clear outlier, with a Dice of exactly 0.000 at every logged epoch.</p>
+
+<h2 id="limits">7. Honest limitations</h2>
+<p>I included this section on purpose: an account of how the project actually went is more useful than one that pretends it went perfectly.</p>
+<ul class="tight">
+<li><strong><code>cystic_duct</code> never learned anything.</strong> Its Dice is exactly 0.0000 from initialisation to the final epoch. This is almost certainly a dataset problem: it is one of the rarest classes among the frames that contain it, and its raw-value mapping was only inferred, never visually confirmed, so some of its signal may also be mislabelled.</li>
+<li><strong>Several other rare or thin structures plateaued around 0.43&ndash;0.45 Dice:</strong> grasper, gallbladder, abdominal wall and GI tract. They are usable but not strong, and tend to be either small and thin (the instruments) or highly variable depending on what occludes them.</li>
+<li><strong>I stopped deliberately.</strong> Once it was clear the ceiling came from class imbalance in the source data, not from more epochs or loss tuning, I stopped instead of iterating further on the same U-Net and dataset.</li>
+<li><strong>Training was noisy and gappy,</strong> because it was spread over several Colab sessions. The 56 of 80 logged epochs are the real numbers, not filler.</li>
+</ul>
+
+<h2 id="run">8. Running inference</h2>
+<p>No GPU or training setup is needed, only Python 3.9 or newer and a terminal.</p>
+<h3>1. Clone and install</h3>
+<div class="cb"><pre>git clone https://github.com/Vihaan30g/surgical-image-segmentation.git
+cd surgical-image-segmentation
+pip install -r requirements.txt</pre></div>
+<h3>2. Download the trained weights</h3>
+<p><a href="https://drive.google.com/file/d/130ePIeZ6A0F6N0XUNNUB8poQS7DbMN7B/view?usp=sharing">Download the model weights</a> and save the file as <code>weights/best_model.pth</code> at the root of the cloned repo. That is the filename the code looks for.</p>
+<h3>3. Add images</h3>
+<p>Put any <code>.jpg</code>, <code>.jpeg</code> or <code>.png</code> surgical frames you want segmented into the <code>inference_input/</code> folder.</p>
+<h3>4. Run</h3>
+<div class="cb"><pre>cd src
+python inference.py</pre></div>
+<p>No arguments are needed. The script finds the weights, processes every image in <code>inference_input/</code>, and writes one file per image to <code>inference_output/</code>, named <code>&lt;original_filename&gt;_prediction.png</code>. Each output is one wide image with three panels side by side:</p>
+<p><strong>original frame &nbsp;|&nbsp; predicted segmentation mask &nbsp;|&nbsp; overlay on the original</strong></p>
+
+<h2 id="structure">9. Repository structure</h2>
+<pre class="tree">surgical-image-segmentation/
+  weights/                     put the downloaded best_model.pth here
+  inference_input/             your own images go here
+  inference_output/            results are written here automatically
+  assets/images/               diagrams and charts used in this project
+  src/
+    config.py                  paths, class mapping, hyperparameters
+    dataset.py                 dataset, mask remapping, augmentation, sampler
+    generate_clip_split.py     builds the clip-level train/val/test split
+    compute_class_weights.py   per-class loss weights
+    model.py                   U-Net architecture
+    losses.py                  Focal, Dice and combined loss
+    metrics.py                 Dice and IoU
+    train.py                   training loop, checkpointing, auto-resume
+    inference.py               run the trained model on your images
+    diagnose.py                debugging utilities used during development
+  requirements.txt
+  README.md</pre>
+
+<h2 id="next">10. Next steps</h2>
+<ul class="tight">
+<li>The dataset, not the architecture, is the real ceiling. Several classes appear in only a handful of source videos, and no loss re-weighting fully makes up for that.</li>
+<li>I plan a follow-up segmentation project using a <strong>transformer-based architecture</strong> (the SegFormer or Mask2Former family) on a <strong>better-balanced dataset</strong>.</li>
+</ul>
+</main>
+
+<footer>Written by Vihaan Gupta &middot; <a href="https://github.com/Vihaan30g">GitHub</a> &middot; <a href="https://github.com/Vihaan30g/surgical-image-segmentation">This repository</a> &middot; <a href="https://www.youtube.com/@vihaan30g">YouTube</a> &middot; <a href="mailto:vihaan30g@gmail.com">vihaan30g@gmail.com</a></footer>
+
+<div id="lb"><img alt=""></div>
+<script>
+document.querySelectorAll('.cb').forEach(function(b){
+  var btn=document.createElement('button');btn.textContent='Copy';
+  btn.onclick=function(){
+    var t=b.querySelector('pre').innerText;
+    (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},1500)}).catch(function(){btn.textContent='Press Ctrl+C'});
+  };
+  b.appendChild(btn);
+});
+var lb=document.getElementById('lb'),lbi=lb.querySelector('img');
+document.querySelectorAll('.fig img').forEach(function(i){
+  i.addEventListener('click',function(){lbi.src=i.src;lbi.alt=i.alt;lb.style.display='flex'});
+});
+lb.addEventListener('click',function(){lb.style.display='none'});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.style.display='none'});
+</script>
+</body>
+</html>
